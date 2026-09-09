@@ -1606,6 +1606,789 @@
     let currentCountry = 'all';
     let currentModalDestId = null;
 
+    // Complete illustrated dataset for all 12 destinations
+    const destinationDetailsData = {
+      cusco: {
+        badge: "🇵🇪 Peru • Sacred Andes",
+        region: "South America",
+        title: "Cusco & The Sacred Valley",
+        subtitle: "Inca trails, high-altitude agriculture, and living Quechua cosmology",
+        costs: {
+          flightUS: 550,
+          flightSA: 380,
+          flightCA: 480,
+          hotelNight: "$75 - $130",
+          foodDay: "$25 - $45",
+          tours: "$280 (Machu Picchu Scenic Train + Boleto Turístico)",
+          totalUS: 1480,
+          totalSA: 1310,
+          totalCA: 1410,
+          currencyTip: "Carry Peruvian Soles (PEN) in cash for artisan markets in Pisac, Chinchero, and Ollantaytambo. Credit cards are standard in Cusco hotels and restaurants."
+        },
+        trail: [
+          {
+            day: "Day 1 • Acclimatization & Megalithic Foundations",
+            icon: "🏛️",
+            desc: "Gentle stroll through the artisan quarter of San Blas, inspect the mortarless 12-Angled Stone, and sip comforting coca leaf tea in the vibrant San Pedro Market."
+          },
+          {
+            day: "Day 2 • The Agricultural Circles of Moray & Maras",
+            icon: "⛰️",
+            desc: "Explore the concentric agricultural microclimate terraces of Moray and walk the 3,000 stepped salt evaporation pans fed by hypersaline subterranean streams."
+          },
+          {
+            day: "Day 3 • Morning Mist over Machu Picchu",
+            icon: "🌄",
+            desc: "Board the scenic morning train winding through Urubamba Canyon to Aguas Calientes, ascending the citadel as clouds lift off Huayna Picchu."
+          },
+          {
+            day: "Day 4 • Weaving Traditions in Chinchero",
+            icon: "🧶",
+            desc: "Interactive demonstration with Quechua women's weaving collectives, learning natural wool-washing using the saqta root and dyeing with cochineal and wild flowers."
+          }
+        ],
+        foods: [
+          {
+            name: "Highland Trout Ceviche",
+            svg: `<svg viewBox="0 0 100 100" class="w-14 h-14"><circle cx="50" cy="50" r="44" fill="#FEE2E2"/><path d="M20 52C20 68 34 80 50 80C66 80 80 68 80 52H20Z" fill="#C2410C"/><ellipse cx="50" cy="52" rx="30" ry="12" fill="#FED7AA"/><circle cx="42" cy="50" r="5" fill="#F87171"/><circle cx="56" cy="53" r="6" fill="#FB923C"/><path d="M45 42L55 46" stroke="#16A34A" stroke-width="3" stroke-linecap="round"/><circle cx="50" cy="62" r="4" fill="#FACC15"/></svg>`,
+            origin: "Glacial river trout cured in brisk lime and leche de tigre, served alongside glazed sweet potato and giant Andean choclo corn.",
+            whereToEat: "Traditional picanterías in Cusco or San Pedro Central Market."
+          },
+          {
+            name: "Lomo Saltado with Ají Amarillo",
+            svg: `<svg viewBox="0 0 100 100" class="w-14 h-14"><rect width="100" height="100" rx="20" fill="#FEF3C7"/><path d="M15 65Q50 85 85 65" stroke="#78350F" stroke-width="8" fill="none" stroke-linecap="round"/><ellipse cx="50" cy="50" rx="26" ry="15" fill="#B45309"/><rect x="36" y="42" width="28" height="6" rx="3" fill="#DC2626"/><rect x="42" y="52" width="20" height="5" rx="2" fill="#F59E0B"/><path d="M50 30L53 38" stroke="#10B981" stroke-width="3"/></svg>`,
+            origin: "Chinese-Peruvian chifa fusion wok-flambéed with beef strips, red onions, tomatoes, and yellow chili pepper, accompanied by double starch (crisp fries and white rice).",
+            whereToEat: "Cicciolina or local bistros in Ollantaytambo."
+          }
+        ],
+        ergTips: [
+          {
+            title: "🌱 Altitude Mindfulness & Pachamama Respect",
+            text: "Take your first afternoon very slowly with abundant hydration. Keep to marked paths and never discard waste on ancient trails."
+          },
+          {
+            title: "🗣️ Meaningful Connection in Quechua",
+            text: "Greeting locals with 'Allillanchu' (How are you?) and 'Allillanmi' (I am well!) opens doors of heartfelt hospitality."
+          }
+        ]
+      },
+
+      cartagena: {
+        badge: "🇨🇴 Colombia • Caribbean Heritage",
+        region: "South America",
+        title: "Cartagena & Rosario Islands",
+        subtitle: "Colonial ramparts, afro-caribbean drums, and coral waters",
+        costs: {
+          flightUS: 420,
+          flightSA: 450,
+          flightCA: 360,
+          hotelNight: "$70 - $120",
+          foodDay: "$25 - $40",
+          tours: "$190 (Rosario Islands Speedboat + Palenque Heritage Tour)",
+          totalUS: 1320,
+          totalSA: 1350,
+          totalCA: 1260,
+          currencyTip: "The Colombian Peso (COP) is used. Always agree on taxi fares or boat charter rates in advance."
+        },
+        trail: [
+          {
+            day: "Day 1 • Sunset Along the Walled Fortress",
+            icon: "🏰",
+            desc: "Stroll between the flower-draped wooden balconies of San Diego and watch the sun dip into the Caribbean Sea from the historic ramparts of Baluarte Santo Domingo."
+          },
+          {
+            day: "Day 2 • Living Art in Getsemaní",
+            icon: "🎨",
+            desc: "Wander through Getsemaní’s vibrant street art corridors depicting Afro-Colombian heroines and dance champeta with neighborhood residents in Plaza de la Trinidad."
+          },
+          {
+            day: "Day 3 • Island Coral Reef Navigation",
+            icon: "⛵",
+            desc: "Speedboat excursion across the translucent Rosario Archipelago for snorkeling amidst protected sea fans and a beachside coconut rice lunch."
+          },
+          {
+            day: "Day 4 • Roots in San Basilio de Palenque",
+            icon: "🥁",
+            desc: "Day trip to the historic maroon refuge to learn herbal medicine from female elders and experience the syncopated rhythm of heritage drums."
+          }
+        ],
+        foods: [
+          {
+            name: "Arepa de Huevo Costeña",
+            svg: `<svg viewBox="0 0 100 100" class="w-14 h-14"><circle cx="50" cy="50" r="40" fill="#FEF08A"/><circle cx="50" cy="50" r="32" fill="#EAB308"/><circle cx="50" cy="50" r="16" fill="#F97316"/><circle cx="48" cy="48" r="8" fill="#FACC15"/></svg>`,
+            origin: "Crisp yellow corn dough double-fried: first to puff, then gently split open to receive a whole raw egg and seasoned minced meat before finishing golden.",
+            whereToEat: "Plaza de San Diego or street kiosks at Las Bóvedas."
+          },
+          {
+            name: "Posta Negra Cartagenera",
+            svg: `<svg viewBox="0 0 100 100" class="w-14 h-14"><rect width="100" height="100" rx="20" fill="#F5F5F4"/><ellipse cx="50" cy="55" rx="34" ry="18" fill="#44403C"/><path d="M25 50C25 40 40 38 50 38C65 38 75 40 75 50C65 56 35 56 25 50Z" fill="#1C1917"/><circle cx="50" cy="45" r="4" fill="#EAB308"/><path d="M35 68Q50 78 65 68" stroke="#D97706" stroke-width="4" fill="none"/></svg>`,
+            origin: "Tender beef braised slowly in a bittersweet reduction of unrefined panela cane sugar, Worcestershire, allspice, and cloves, served with coconut rice.",
+            whereToEat: "La Cocina de Socorro or Candé."
+          }
+        ],
+        ergTips: [
+          {
+            title: "🌺 Support Palenqueras with Dignity",
+            text: "When photographing women carrying fruit platters, buy their homemade coconut sweets or fresh tropical fruits to directly honor their livelihood."
+          },
+          {
+            title: "🎶 The Cultural Power of Champeta",
+            text: "Champeta is an emblem of urban Afro-diasporic resilience that fuses Central African soukous guitars with Caribbean basslines."
+          }
+        ]
+      },
+
+      atacama: {
+        badge: "🇨🇱 Chile • Altiplano & Deep Space",
+        region: "South America",
+        title: "The Atacama Desert",
+        subtitle: "Stargazing sanctuaries, salt crust lagoons, and volcanic geysers",
+        costs: {
+          flightUS: 680,
+          flightSA: 390,
+          flightCA: 620,
+          hotelNight: "$90 - $160",
+          foodDay: "$35 - $60",
+          tours: "$320 (Astro Stargazing + Tatio Geysers + Moon Valley)",
+          totalUS: 1790,
+          totalSA: 1500,
+          totalCA: 1730,
+          currencyTip: "Chilean Pesos (CLP) are required for entrance fees to indigenous-run lagoons. ATMs in San Pedro often run out of cash on weekends."
+        },
+        trail: [
+          {
+            day: "Day 1 • Valley of the Moon at Dusk",
+            icon: "🏜️",
+            desc: "Hike along wind-carved salt ridges as the sun bathes the Licancabur volcano in pink and copper hues."
+          },
+          {
+            day: "Day 2 • Natural Flotation in Laguna Céjar",
+            icon: "🏊",
+            desc: "Experience effortless buoyancy in high-salinity crystalline pools surrounded by pristine white mineral crusts."
+          },
+          {
+            day: "Day 3 • Geysers del Tatio at Dawn",
+            icon: "🌋",
+            desc: "Early morning expedition at 4,300m to witness 10-meter thermal steam plumes rising into freezing sunrise air."
+          },
+          {
+            day: "Day 4 • Archaeoastronomy with Indigenous Elders",
+            icon: "✨",
+            desc: "Deep-sky telescope observation accompanied by Licanantay narratives about the cosmic animal constellations of the Milky Way."
+          }
+        ],
+        foods: [
+          {
+            name: "Pastel de Choclo with Desert Herbs",
+            svg: `<svg viewBox="0 0 100 100" class="w-14 h-14"><rect width="100" height="100" rx="20" fill="#FEF3C7"/><path d="M20 70L28 40H72L80 70H20Z" fill="#B45309"/><ellipse cx="50" cy="40" rx="26" ry="10" fill="#F59E0B"/><circle cx="45" cy="38" r="3" fill="#78350F"/><circle cx="55" cy="42" r="2.5" fill="#78350F"/><path d="M48 28L52 35" stroke="#15803D" stroke-width="2.5"/></svg>`,
+            origin: "Earthenware casserole of sweet ground corn baked over savory braised beef, chicken, hard-boiled eggs, and black olives, perfumed with native rica-rica.",
+            whereToEat: "Restaurante Adobe on Calle Caracoles."
+          },
+          {
+            name: "Rica-Rica & Chañar Gelato",
+            svg: `<svg viewBox="0 0 100 100" class="w-14 h-14"><rect width="100" height="100" rx="20" fill="#F0FDF4"/><path d="M35 75L50 90L65 75Z" fill="#D97706"/><circle cx="50" cy="55" r="18" fill="#86EFAC"/><circle cx="45" cy="45" r="14" fill="#BBF7D0"/><circle cx="58" cy="50" r="12" fill="#4ADE80"/><path d="M50 35L52 42" stroke="#166534" stroke-width="2"/></svg>`,
+            origin: "Artisanal desert gelato flavored with wild mint-sage herbs and chañar tree fruit syrup resembling smoky salted caramel.",
+            whereToEat: "Heladería Babalu in San Pedro de Atacama."
+          }
+        ],
+        ergTips: [
+          {
+            title: "🌌 Protecting the Night Sky Sanctuary",
+            text: "Use only red light flashlights during stargazing tours to safeguard your natural night vision and protect nocturnal desert life."
+          },
+          {
+            title: "💧 Extreme Water Conservation",
+            text: "Fresh water is precious for indigenous highland oasis farming. Keep showers brief and utilize reusable containers."
+          }
+        ]
+      },
+
+      uyuni: {
+        badge: "🇧🇴 Bolivia • The White Horizon",
+        region: "South America",
+        title: "Salar de Uyuni & Potosí",
+        subtitle: "The infinite mirror, colonial mints, and Aymara heartland",
+        costs: {
+          flightUS: 650,
+          flightSA: 460,
+          flightCA: 590,
+          hotelNight: "$45 - $90",
+          foodDay: "$15 - $30",
+          tours: "$240 (3-Day 4x4 Salar & Colored Lagoons Circuit)",
+          totalUS: 1290,
+          totalSA: 1100,
+          totalCA: 1230,
+          currencyTip: "Bolivianos (BOB) in cash are mandatory to pay national park entrance fees in the Eduardo Avaroa Reserve."
+        },
+        trail: [
+          {
+            day: "Day 1 • The Sea of Salt & Island of Cacti",
+            icon: "🌵",
+            desc: "4x4 drive across brilliant white polygonal crusts to Incahuasi Island, hiking among colossal 10-meter cardón cacti rooted on ancient fossilized reefs."
+          },
+          {
+            day: "Day 2 • The Sky-Reflecting Water Mirror",
+            icon: "🪞",
+            desc: "During the rainy season (Jan–March), experience the surreal optical illusion of walking suspended amidst cloudscapes."
+          },
+          {
+            day: "Day 3 • Laguna Colorada & Andean Flamingos",
+            icon: "🦩",
+            desc: "Travel to mineral lakes tinged deep red by algae where thousands of rare James's flamingos nest under volcanic shadows."
+          },
+          {
+            day: "Day 4 • The Mines of Potosí's Cerro Rico",
+            icon: "⛏️",
+            desc: "Visit the historic Casa de la Moneda and meet miner cooperatives to understand offerings left for El Tío, guardian spirit of the underground."
+          }
+        ],
+        foods: [
+          {
+            name: "Juicy Bolivian Salteña",
+            svg: `<svg viewBox="0 0 100 100" class="w-14 h-14"><rect width="100" height="100" rx="20" fill="#FFFBEB"/><ellipse cx="50" cy="55" rx="35" ry="20" fill="#D97706"/><path d="M15 55Q50 35 85 55" stroke="#92400E" stroke-width="4" fill="#B45309"/><path d="M20 53Q50 45 80 53" stroke="#FDE68A" stroke-width="2" stroke-dasharray="3 3"/></svg>`,
+            origin: "Braided pastry shell filled with piping-hot savory stew of meat, potatoes, peas, and aji pepper. Eaten upright with a spoon to avoid spilling the broth!",
+            whereToEat: "Morning salteñerías in Uyuni and Potosí."
+          },
+          {
+            name: "Royal Quinoa Altiplanic Soup",
+            svg: `<svg viewBox="0 0 100 100" class="w-14 h-14"><rect width="100" height="100" rx="20" fill="#F5F5F4"/><ellipse cx="50" cy="65" rx="36" ry="14" fill="#E7E5E4"/><ellipse cx="50" cy="52" rx="32" ry="12" fill="#78716C"/><path d="M20 52C20 70 35 82 50 82C65 82 80 70 80 52H20Z" fill="#A8A29E"/><circle cx="45" cy="52" r="2" fill="#FEF08A"/><circle cx="55" cy="50" r="2.5" fill="#FEF08A"/><circle cx="48" cy="55" r="2" fill="#FEF08A"/><path d="M42 42Q50 35 58 42" stroke="#16A34A" stroke-width="2.5" fill="none"/></svg>`,
+            origin: "Ancestral royal grain cultivated for millennia around the salt flats, simmered with native tubers and wild muña mint.",
+            whereToEat: "Community lodges along the high-altitude route."
+          }
+        ],
+        ergTips: [
+          {
+            title: "🏔️ Warmth at 4,000m Elevation",
+            text: "Temperatures plummet drastically once the sun sets over the salt flat. Pack thermal base layers and windbreakers."
+          },
+          {
+            title: "🤝 Respect Your Aymara Drivers",
+            text: "Expedition drivers are master mechanics navigating unmarked salt tracks. Gratuities and friendly engagement are warmly valued."
+          }
+        ]
+      },
+
+      mendoza: {
+        badge: "🇦🇷 Argentina • Andean Foothills",
+        region: "South America",
+        title: "Mendoza & The Andes",
+        subtitle: "Vineyards, high-mountain passes, and the ritual of the asado",
+        costs: {
+          flightUS: 620,
+          flightSA: 320,
+          flightCA: 580,
+          hotelNight: "$65 - $130",
+          foodDay: "$25 - $45",
+          tours: "$210 (Valle de Uco Bodega Tastings + Thermal Springs)",
+          totalUS: 1410,
+          totalSA: 1110,
+          totalCA: 1370,
+          currencyTip: "In Argentina, international credit cards with the MEP tourist rate offer great conversion value without carrying bulky cash stacks."
+        },
+        trail: [
+          {
+            day: "Day 1 • Vineyard Cycling in Chacras de Coria",
+            icon: "🚲",
+            desc: "Rent a bicycle to pedal along plane tree-shaded lanes in Luján de Cuyo, visiting family-owned bodegas and tasting Malbec straight from barrel cellars."
+          },
+          {
+            day: "Day 2 • Modernist Architecture in Uco Valley",
+            icon: "🍇",
+            desc: "Tour striking wineries integrated into the Andean backdrop, paired with multi-course outdoor gastronomy lunches."
+          },
+          {
+            day: "Day 3 • High Mountain Pass & Mount Aconcagua",
+            icon: "🏔️",
+            desc: "Drive Route 7 past Puente del Inca up to the national park viewpoint of Aconcagua's glaciated 6,961m south wall."
+          },
+          {
+            day: "Day 4 • River Canyon Thermal Baths",
+            icon: "♨️",
+            desc: "Soak in stone pools built into the rocky cliffs of the Mendoza River canyon at Termas de Cacheuta."
+          }
+        ],
+        foods: [
+          {
+            name: "Wood-Fired Asado Criollo",
+            svg: `<svg viewBox="0 0 100 100" class="w-14 h-14"><rect width="100" height="100" rx="20" fill="#FEF2F2"/><path d="M15 65H85" stroke="#44403C" stroke-width="4"/><path d="M25 50L75 50" stroke="#44403C" stroke-width="3"/><rect x="25" y="42" width="50" height="14" rx="4" fill="#991B1B"/><path d="M32 46H68" stroke="#F87171" stroke-width="2"/><circle cx="50" cy="49" r="3" fill="#15803D"/></svg>`,
+            origin: "Prime beef cuts grilled over open vine wood embers, dressed with fresh parsley, garlic, oregano, and olive oil chimichurri.",
+            whereToEat: "Francis Mallmann's 1884 or rustic vineyard bodegas."
+          },
+          {
+            name: "Clay Oven Mendocina Empanadas",
+            svg: `<svg viewBox="0 0 100 100" class="w-14 h-14"><rect width="100" height="100" rx="20" fill="#FFFBEB"/><ellipse cx="50" cy="52" rx="34" ry="18" fill="#F59E0B"/><path d="M18 52C25 38 75 38 82 52" stroke="#B45309" stroke-width="4" fill="#D97706"/><circle cx="35" cy="50" r="3" fill="#451A03"/></svg>`,
+            origin: "Hand-rolled pastry stuffed with knife-minced beef, sweet sautéed onions, hard-boiled eggs, and green olives, blistered in wood-fired ovens.",
+            whereToEat: "Bodega La Azul or traditional neighborhood markets."
+          }
+        ],
+        ergTips: [
+          {
+            title: "🌿 The Huarpe Irrigation Acequias",
+            text: "Mendoza’s green groves exist because Huarpe water channels were preserved by later generations. Never dispose of litter into street canals."
+          },
+          {
+            title: "🍷 The Cultural Art of Sobremesa",
+            text: "Enjoy lingering at the table in relaxed conversation long after food is finished—there is never a rush to request the check."
+          }
+        ]
+      },
+
+      ouropreto: {
+        badge: "🇧🇷 Brazil • Baroque & Soul",
+        region: "South America",
+        title: "Ouro Preto & Tiradentes",
+        subtitle: "Soapstone carvings, gold mining history, and Minas woodstove warmth",
+        costs: {
+          flightUS: 750,
+          flightSA: 180,
+          flightCA: 690,
+          hotelNight: "$55 - $110",
+          foodDay: "$20 - $35",
+          tours: "$120 (Mine Visits + Aleijadinho Museums + Tiradentes Train)",
+          totalUS: 1450,
+          totalSA: 880,
+          totalCA: 1390,
+          currencyTip: "Brazilian Reais (BRL) are used. Contactless cards and Pix mobile payments are accepted nearly everywhere."
+        },
+        trail: [
+          {
+            day: "Day 1 • Aleijadinho's Sculptures in Ouro Preto",
+            icon: "⛪",
+            desc: "Ascend to the Church of Saint Francis of Assisi, marveling at soapstone reliefs and Mestre Ataíde's ceiling frescoes."
+          },
+          {
+            day: "Day 2 • Afro-Brazilian Legacy in Mina do Chico Rei",
+            icon: "🔦",
+            desc: "Descend into historic underground gold galleries to hear oral histories of enslaved miners who bought freedom and built their own sanctuaries."
+          },
+          {
+            day: "Day 3 • Historic Steam Train to Tiradentes",
+            icon: "🚂",
+            desc: "Ride the heritage locomotive skirting the São José mountain range to explore the cobblestone ateliers of Tiradentes and Bichinho."
+          },
+          {
+            day: "Day 4 • Raw Milk Cheese Farms & Cachaça Stills",
+            icon: "🧀",
+            desc: "Taste artisanal Queijo Minas cured on native wood shelves alongside freshly brewed drip coffee."
+          }
+        ],
+        foods: [
+          {
+            name: "Feijão Tropeiro in Soapstone Pot",
+            svg: `<svg viewBox="0 0 100 100" class="w-14 h-14"><rect width="100" height="100" rx="20" fill="#FFFBEB"/><ellipse cx="50" cy="55" rx="34" ry="16" fill="#78716C"/><path d="M22 55C22 72 35 82 50 82C65 82 78 72 78 55H22Z" fill="#57534E"/><circle cx="42" cy="52" r="4" fill="#D97706"/><circle cx="58" cy="54" r="5" fill="#CA8A04"/><path d="M48 46L54 50" stroke="#16A34A" stroke-width="3"/></svg>`,
+            origin: "Hearty horseman's dish combining brown beans, toasted cassava flour, smoked sausage, crispy pork rinds, collard greens, and farm eggs.",
+            whereToEat: "Bené da Flauta or Casa do Ouvidor in Ouro Preto."
+          },
+          {
+            name: "Warm Pão de Queijo with Drip Coffee",
+            svg: `<svg viewBox="0 0 100 100" class="w-14 h-14"><rect width="100" height="100" rx="20" fill="#FEF3C7"/><circle cx="45" cy="52" r="18" fill="#FBBF24"/><circle cx="40" cy="48" r="3" fill="#D97706"/><circle cx="50" cy="54" r="2.5" fill="#D97706"/><path d="M68 45H78V62H68" stroke="#78350F" stroke-width="3" fill="none"/><rect x="62" y="42" width="16" height="24" rx="4" fill="#92400E"/></svg>`,
+            origin: "Chewy cheese bread baked with sweet and sour manioc starch and aged cured Minas cheese, served hot from the oven.",
+            whereToEat: "Colonial cafes in Tiradentes."
+          }
+        ],
+        ergTips: [
+          {
+            title: "👞 Footwear for Historic Slopes",
+            text: "Cobblestone streets are uneven and slippery when wet. Wear sturdy, rubber-soled walking shoes."
+          },
+          {
+            title: "☕ Minas Hospitality",
+            text: "Accepting an offered cup of fresh coffee (cafezinho) and a moment of conversation is the heartfelt local way to seal a genuine friendship."
+          }
+        ]
+      },
+
+      galapagos: {
+        badge: "🇪🇨 Ecuador • Evolutionary Haven",
+        region: "South America",
+        title: "Galápagos & Historic Quito",
+        subtitle: "Giant tortoises, volcanic calderas, and equatorial heritage",
+        costs: {
+          flightUS: 750,
+          flightSA: 720,
+          flightCA: 640,
+          hotelNight: "$110 - $210",
+          foodDay: "$35 - $60",
+          tours: "$420 (Galápagos National Park Entry + Snorkel + Inter-island Ferry)",
+          totalUS: 2250,
+          totalSA: 2220,
+          totalCA: 2140,
+          currencyTip: "Ecuador operates on the US Dollar (USD). Ensure bills are crisp and free of tears, as damaged currency is often rejected."
+        },
+        trail: [
+          {
+            day: "Day 1 • Historic Quito & The Equator Line",
+            icon: "🧭",
+            desc: "Stand with a foot in both hemispheres at Mitad del Mundo and marvel at the gold-leaf interior of La Compañía de Jesús in Quito."
+          },
+          {
+            day: "Day 2 • Santa Cruz Highlands & Free Tortoises",
+            icon: "🐢",
+            desc: "Fly to Galápagos to walk through lush ranchlands where 250kg giant tortoises graze peacefully in the wild."
+          },
+          {
+            day: "Day 3 • Snorkeling Los Túneles in Isabela",
+            icon: "🤿",
+            desc: "Swim through submerged volcanic lava bridges alongside playful sea lions, sea horses, Galápagos penguins, and reef sharks."
+          },
+          {
+            day: "Day 4 • Marine Iguanas of Tortuga Bay",
+            icon: "🦎",
+            desc: "Hike through giant cactus forests to pristine white beaches where marine iguanas sunbathe on black basalt rocks."
+          }
+        ],
+        foods: [
+          {
+            name: "Revitalizing Encebollado",
+            svg: `<svg viewBox="0 0 100 100" class="w-14 h-14"><rect width="100" height="100" rx="20" fill="#FEF2F2"/><ellipse cx="50" cy="55" rx="34" ry="16" fill="#DC2626"/><path d="M20 55C20 72 34 82 50 82C66 82 80 72 80 55H20Z" fill="#991B1B"/><circle cx="45" cy="50" r="4" fill="#FEF08A"/><path d="M35 48Q50 38 65 48" stroke="#831843" stroke-width="3" fill="none"/></svg>`,
+            origin: "Fresh tuna soup simmered with cassava, cumin, and red onions pickled with lime and cilantro, served with green plantain chifles.",
+            whereToEat: "Local picanterías in Puerto Ayora or Quito's Central Market."
+          },
+          {
+            name: "Locro de Papa with Fresh Cheese",
+            svg: `<svg viewBox="0 0 100 100" class="w-14 h-14"><rect width="100" height="100" rx="20" fill="#FFFBEB"/><ellipse cx="50" cy="55" rx="34" ry="16" fill="#FACC15"/><path d="M20 55C20 72 34 82 50 82C66 82 80 72 80 55H20Z" fill="#EAB308"/><rect x="42" y="48" width="8" height="8" fill="#FFFFFF" rx="1"/><rect x="52" y="52" width="7" height="7" fill="#FFFFFF" rx="1"/><path d="M36 50L40 56" stroke="#16A34A" stroke-width="2.5"/></svg>`,
+            origin: "Creamy traditional Andean potato chowder made with native tubers, queso fresco, and ripe avocado.",
+            whereToEat: "Historic bistros in San Marcos quarter, Quito."
+          }
+        ],
+        ergTips: [
+          {
+            title: "🚯 Strict 2-Meter Wildlife Rule",
+            text: "Galápagos animals have no natural fear of humans. Always maintain a minimum 2-meter distance and never touch any animal."
+          },
+          {
+            title: "🧴 Reef-Safe Mineral Sunscreen",
+            text: "Corals and marine iguanas are sensitive to synthetic chemicals. Use certified mineral reef-safe sunscreen or UV swim clothing."
+          }
+        ]
+      },
+
+      lencois: {
+        badge: "🇧🇷 Brazil • Quartz Dunes & Lagoons",
+        region: "South America",
+        title: "Lençóis & São Luís",
+        subtitle: "Rolling white dunes, rainwater oases, and Afro-indigenous folklore",
+        costs: {
+          flightUS: 760,
+          flightSA: 260,
+          flightCA: 710,
+          hotelNight: "$60 - $120",
+          foodDay: "$20 - $35",
+          tours: "$160 (Lagoa Bonita 4x4 Circuit + Rio Preguiças Boat)",
+          totalUS: 1490,
+          totalSA: 990,
+          totalCA: 1440,
+          currencyTip: "Carry cash in Reais for small boat transfers and remote beach food stalls in Atins."
+        },
+        trail: [
+          {
+            day: "Day 1 • Tiled Colonial Mansions of São Luís",
+            icon: "🏛️",
+            desc: "Explore the UNESCO-listed city center adorned with Portuguese ceramic tiles and visit the vibrant Reggae Museum."
+          },
+          {
+            day: "Day 2 • Sunset at Lagoa Bonita",
+            icon: "🌅",
+            desc: "Ascend the steep entrance dune by rope to behold the surreal expanse of rolling white dunes and plunge into emerald rainwater lagoons."
+          },
+          {
+            day: "Day 3 • Downriver Along Rio Preguiças",
+            icon: "🚤",
+            desc: "Speedboat excursion along mangrove estuaries, climb the Mandacaru lighthouse for panoramic views, and arrive in rustic sandy Atins."
+          },
+          {
+            day: "Day 4 • An Evening of Tambor de Crioula",
+            icon: "🪘",
+            desc: "Join community gatherings around fire-tuned wood drums honoring Saint Benedict with rhythmic singing and circular dancing."
+          }
+        ],
+        foods: [
+          {
+            name: "Arroz de Cuxá Maranhense",
+            svg: `<svg viewBox="0 0 100 100" class="w-14 h-14"><rect width="100" height="100" rx="20" fill="#F0FDF4"/><circle cx="50" cy="52" r="32" fill="#15803D"/><circle cx="48" cy="48" r="4" fill="#F97316"/><circle cx="56" cy="54" r="3.5" fill="#F97316"/><circle cx="42" cy="56" r="3" fill="#FDE68A"/><path d="M45 40L52 46" stroke="#FEF08A" stroke-width="2"/></svg>`,
+            origin: "Rice prepared with native sour vinagreira leaves (roselle), ground sesame seeds, dried shrimp, and hot peppers pounded in a wooden mortar.",
+            whereToEat: "Restaurante Senac or Cabana do Sol in São Luís."
+          },
+          {
+            name: "Charcoal Grilled Prawns in Atins",
+            svg: `<svg viewBox="0 0 100 100" class="w-14 h-14"><rect width="100" height="100" rx="20" fill="#FEF3C7"/><ellipse cx="50" cy="55" rx="32" ry="18" fill="#F59E0B"/><path d="M35 50C42 42 58 42 65 50" stroke="#DC2626" stroke-width="5" fill="none" stroke-linecap="round"/><circle cx="34" cy="50" r="3" fill="#7F1D1D"/><path d="M64 48L72 44" stroke="#DC2626" stroke-width="2.5"/></svg>`,
+            origin: "Freshly caught coastal prawns grilled over charcoal with garlic butter, served right on the beach.",
+            whereToEat: "Restaurante da Luzia or Sr. Antônio in Canto do Atins."
+          }
+        ],
+        ergTips: [
+          {
+            title: "📅 Ideal Seasonal Travel Window",
+            text: "Rainwater lagoons reach their fullest splendor between June and September. By October, many begin evaporating until the next rainy season."
+          },
+          {
+            title: "🥁 Respecting Folk Traditions",
+            text: "Bumba Meu Boi is a sacred living ritual. Applaud the singers and treat embroidered costumes with deep care."
+          }
+        ]
+      },
+
+      antigua: {
+        badge: "🇬🇹 Guatemala • Maya Soul",
+        region: "Central America",
+        title: "Antigua & Lake Atitlán",
+        subtitle: "Volcanic horizons, living Maya languages, and backstrap textiles",
+        costs: {
+          flightUS: 380,
+          flightSA: 560,
+          flightCA: 190,
+          hotelNight: "$55 - $100",
+          foodDay: "$20 - $35",
+          tours: "$170 (Lake Boat Hop + Pacaya Volcano Hike)",
+          totalUS: 1260,
+          totalSA: 1440,
+          totalCA: 1070,
+          currencyTip: "The Guatemalan Quetzal (GTQ) is named after the sacred Maya bird. Cash is indispensable in village craft markets."
+        },
+        trail: [
+          {
+            day: "Day 1 • Santa Catalina Arch in Antigua",
+            icon: "🏛️",
+            desc: "Stroll along cobblestone streets framing the Volcán de Agua through the yellow archway, visiting ruined monastic courtyards."
+          },
+          {
+            day: "Day 2 • Boat Crossing Across Lake Atitlán",
+            icon: "⛵",
+            desc: "Cruise past crater volcanoes to San Juan La Laguna to visit women's botanical dye workshops and shade-grown coffee co-ops."
+          },
+          {
+            day: "Day 3 • The Syncretic Altar of Maximón",
+            icon: "🕯️",
+            desc: "Visit the community house in Santiago Atitlán sheltering Maximón to witness prayer rituals conducted in Tz'utujil with copal incense."
+          },
+          {
+            day: "Day 4 • Pacaya Volcano Lava Fields",
+            icon: "🌋",
+            desc: "Hike across black basaltic cinder slopes to roast marshmallows over active geothermal vents."
+          }
+        ],
+        foods: [
+          {
+            name: "Pepián de Pollo Maya",
+            svg: `<svg viewBox="0 0 100 100" class="w-14 h-14"><rect width="100" height="100" rx="20" fill="#FEF3C7"/><ellipse cx="50" cy="55" rx="34" ry="16" fill="#78350F"/><path d="M22 55C22 72 35 82 50 82C65 82 78 72 78 55H22Z" fill="#57534E"/><circle cx="45" cy="50" r="5" fill="#DC2626"/><circle cx="56" cy="52" r="4" fill="#F59E0B"/><circle cx="48" cy="58" r="3" fill="#D97706"/></svg>`,
+            origin: "Guatemala’s national dish: tender chicken slow-cooked in a complex, aromatic sauce of roasted squash seeds (pepitoria), sesame, and gentle chilies.",
+            whereToEat: "La Cuevita de Los Urquizú in Antigua."
+          },
+          {
+            name: "Rellenitos de Plátano",
+            svg: `<svg viewBox="0 0 100 100" class="w-14 h-14"><rect width="100" height="100" rx="20" fill="#FFFBEB"/><ellipse cx="50" cy="52" rx="30" ry="16" fill="#EAB308"/><ellipse cx="50" cy="52" rx="16" ry="8" fill="#451A03"/><path d="M30 45Q50 55 70 45" stroke="#FDE68A" stroke-width="2" fill="none"/></svg>`,
+            origin: "Mashed boiled plantain croquettes stuffed with chocolate-sweetened black bean paste, fried until caramelized and dusted in sugar.",
+            whereToEat: "Vendors at Antigua Central Market."
+          }
+        ],
+        ergTips: [
+          {
+            title: "🧶 The Secret Language of Huipiles",
+            text: "Embroidered Maya blouses are personal works of art: patterns and motifs communicate the wearer's home village, lineage, and clan history."
+          },
+          {
+            title: "☕ Direct Coffee Purchasing",
+            text: "Buy coffee directly from local indigenous grower cooperatives where revenues directly fund highland village schooling."
+          }
+        ]
+      },
+
+      monteverde: {
+        badge: "🇨🇷 Costa Rica • Pura Vida",
+        region: "Central America",
+        title: "Monteverde & Nicoya",
+        subtitle: "Hanging cloud bridges, biodiversity reserves, and longevity secrets",
+        costs: {
+          flightUS: 420,
+          flightSA: 580,
+          flightCA: 220,
+          hotelNight: "$80 - $140",
+          foodDay: "$30 - $50",
+          tours: "$230 (Hanging Canopy Bridges + Quetzal Guide + Arenal Springs)",
+          totalUS: 1490,
+          totalSA: 1650,
+          totalCA: 1290,
+          currencyTip: "Costa Rican Colones (CRC) are used, though US Dollars are widely accepted for tours and eco-lodges."
+        },
+        trail: [
+          {
+            day: "Day 1 • Canopy Bridges in the Cloud Forest",
+            icon: "🌉",
+            desc: "Morning trek across suspension bridges 60 meters above the forest floor, surrounded by mosses and blooming orchids."
+          },
+          {
+            day: "Day 2 • Searching for the Resplendent Quetzal",
+            icon: "🦜",
+            desc: "Guided birding walk through Santa Elena Biological Reserve to spot quetzals feeding on wild laurel fruits."
+          },
+          {
+            day: "Day 3 • Longevity Wisdom in Nicoya",
+            icon: "🌿",
+            desc: "Visit community farms in the Blue Zone to learn how mineral water, fresh diet, and deep purpose (plan de vida) sustain active centenarians."
+          },
+          {
+            day: "Day 4 • Volcanic Hot Springs in Arenal",
+            icon: "♨️",
+            desc: "Soak in magma-heated thermal rivers winding through tropical gardens at the foot of Arenal Volcano."
+          }
+        ],
+        foods: [
+          {
+            name: "Traditional Gallo Pinto",
+            svg: `<svg viewBox="0 0 100 100" class="w-14 h-14"><rect width="100" height="100" rx="20" fill="#FEF3C7"/><circle cx="50" cy="52" r="30" fill="#FFFFFF"/><circle cx="42" cy="48" r="4" fill="#3B2F2F"/><circle cx="56" cy="54" r="4" fill="#3B2F2F"/><circle cx="48" cy="58" r="4" fill="#3B2F2F"/><path d="M40 40Q50 35 60 40" stroke="#EA580C" stroke-width="2.5" fill="none"/></svg>`,
+            origin: "Rice and black beans sautéed with onions, peppers, and savory Salsa Lizano, served for breakfast with farm eggs, fried cheese, and plantains.",
+            whereToEat: "Local sodas (family diners) in Santa Elena."
+          },
+          {
+            name: "Classic Casado Lunch",
+            svg: `<svg viewBox="0 0 100 100" class="w-14 h-14"><rect width="100" height="100" rx="20" fill="#F0FDF4"/><circle cx="50" cy="52" r="34" fill="#E2E8F0"/><rect x="35" y="44" width="30" height="12" rx="3" fill="#D97706"/><circle cx="34" cy="40" r="5" fill="#FFFFFF"/><circle cx="65" cy="42" r="4" fill="#15803D"/><path d="M40 64H60" stroke="#EA580C" stroke-width="4" stroke-linecap="round"/></svg>`,
+            origin: "The balanced daily staple: portions of rice, beans, fresh salad, sweet fried plantains, and grilled fish.",
+            whereToEat: "Soda La Amistad or Soda Sabor Tico."
+          }
+        ],
+        ergTips: [
+          {
+            title: "🍃 The Philosophy of Pura Vida",
+            text: "'Pura Vida' is more than a greeting; it represents gratitude, peaceful coexistence, and an unhurried perspective on life."
+          },
+          {
+            title: "🐒 Never Feed Wildlife",
+            text: "Feeding coatis or monkeys damages their natural foraging behavior and harms animal wellness."
+          }
+        ]
+      },
+
+      panama: {
+        badge: "🇵🇦 Panama • Two Oceans",
+        region: "Central America",
+        title: "Casco Antiguo & Guna Yala",
+        subtitle: "Global maritime crossroads and indigenous island autonomy",
+        costs: {
+          flightUS: 430,
+          flightSA: 490,
+          flightCA: 240,
+          hotelNight: "$75 - $130",
+          foodDay: "$25 - $45",
+          tours: "$210 (Guna Yala San Blas Day Tour + Miraflores Locks)",
+          totalUS: 1420,
+          totalSA: 1480,
+          totalCA: 1230,
+          currencyTip: "The Panamanian Balboa (PAB) is pegged 1:1 with the US Dollar (USD), which is the official circulating paper currency."
+        },
+        trail: [
+          {
+            day: "Day 1 • Plaza de Francia & Colonial Rooftops",
+            icon: "🌆",
+            desc: "Explore Casco Viejo's brick plazas and golden altars, ending the evening on an outdoor terrace looking across the modern bay skyline."
+          },
+          {
+            day: "Day 2 • Engineering at Miraflores Locks",
+            icon: "🚢",
+            desc: "Watch massive container vessels transit through the Panama Canal locks as water levels effortlessly shift between oceans."
+          },
+          {
+            day: "Day 3 • Journey to Autonomous Guna Yala",
+            icon: "🏝️",
+            desc: "4x4 journey through the jungle divide followed by boat navigation to pristine coral cays governed autonomously by the Guna people."
+          },
+          {
+            day: "Day 4 • Textile Workshop with Guna Artisans",
+            icon: "🎨",
+            desc: "Learn the reverse appliqué needlework technique of Molas, understanding the spiritual symbolism woven into each cotton layer."
+          }
+        ],
+        foods: [
+          {
+            name: "Sancocho de Gallina Panameño",
+            svg: `<svg viewBox="0 0 100 100" class="w-14 h-14"><rect width="100" height="100" rx="20" fill="#FEF2F2"/><ellipse cx="50" cy="55" rx="34" ry="16" fill="#F59E0B"/><path d="M22 55C22 72 35 82 50 82C65 82 78 72 78 55H22Z" fill="#D97706"/><circle cx="44" cy="50" r="5" fill="#FEF08A"/><circle cx="56" cy="52" r="4" fill="#FFFFFF"/><path d="M46 42L52 48" stroke="#15803D" stroke-width="3"/></svg>`,
+            origin: "Heartwarming chicken soup simmered with native ñame yams and seasoned purely with culantro leaves, served with white rice.",
+            whereToEat: "El Trapiche on Via Argentina or Casco Viejo."
+          },
+          {
+            name: "Crispy Yucca Carimañolas",
+            svg: `<svg viewBox="0 0 100 100" class="w-14 h-14"><rect width="100" height="100" rx="20" fill="#FFFBEB"/><ellipse cx="50" cy="52" rx="32" ry="14" fill="#D97706"/><ellipse cx="50" cy="52" rx="16" ry="6" fill="#78350F"/><path d="M25 50Q50 42 75 50" stroke="#FDE68A" stroke-width="2" fill="none"/></svg>`,
+            origin: "Mashed cassava torpedoes stuffed with spiced ground meat and fried until shatteringly crisp outside and fluffy within.",
+            whereToEat: "Traditional breakfast bakeries in Panama City."
+          }
+        ],
+        ergTips: [
+          {
+            title: "🏝️ Community Governance in Guna Yala",
+            text: "San Blas is a sovereign indigenous territory (comarca). Always ask before photographing residents and honor local community entry regulations."
+          },
+          {
+            title: "🚕 Efficient Urban Transit",
+            text: "Traffic can be heavy during rush hour. Panama City's metro is clean, air-conditioned, and quick for traversing key central districts."
+          }
+        ]
+      },
+
+      ometepe: {
+        badge: "🇳🇮 Nicaragua • Volcanic Lakes",
+        region: "Central America",
+        title: "Granada & Ometepe Island",
+        subtitle: "Twin volcanic peaks in freshwater seas and pre-Columbian stone art",
+        costs: {
+          flightUS: 450,
+          flightSA: 620,
+          flightCA: 210,
+          hotelNight: "$40 - $80",
+          foodDay: "$15 - $30",
+          tours: "$140 (Ometepe Ferry + Istián Kayak + Isletas Boat)",
+          totalUS: 1190,
+          totalSA: 1360,
+          totalCA: 950,
+          currencyTip: "The Nicaraguan Córdoba (NIO) is the local currency. US dollar bills are accepted, but change will almost always be given in córdobas."
+        },
+        trail: [
+          {
+            day: "Day 1 • Colonial Granada & Lake Isletas",
+            icon: "⛵",
+            desc: "Climb the tower of La Merced church for vistas of Mombacho Volcano before boating through the miniature volcanic islands of Lake Cocibolca."
+          },
+          {
+            day: "Day 2 • Ferry Crossing to Ometepe",
+            icon: "🌋",
+            desc: "Cross the freshwater sea as the dual silhouettes of Concepción and Maderas volcanoes grow larger on the horizon."
+          },
+          {
+            day: "Day 3 • Kayaking the Rio Istián Wetlands",
+            icon: "🛶",
+            desc: "Paddle silently between flooded trees in the isthmus separating the volcanoes, spotting herons, turtles, and howler monkeys."
+          },
+          {
+            day: "Day 4 • Petroglyphs & Ojo de Agua Spring",
+            icon: "💧",
+            desc: "Examine ancient spiral petroglyphs followed by a swim in crystalline subterranean spring waters."
+          }
+        ],
+        foods: [
+          {
+            name: "Classic Vigorón on Banana Leaf",
+            svg: `<svg viewBox="0 0 100 100" class="w-14 h-14"><rect width="100" height="100" rx="20" fill="#F0FDF4"/><polygon points="20,70 80,70 70,40 30,40" fill="#15803D"/><circle cx="45" cy="50" r="8" fill="#FEF08A"/><ellipse cx="58" cy="48" rx="8" ry="5" fill="#D97706"/><circle cx="50" cy="42" r="3" fill="#DC2626"/></svg>`,
+            origin: "Steamed tender cassava roots topped with crispy pork chicharrón and tart pickled cabbage salad with mimbro peppers, served on banana leaves.",
+            whereToEat: "Granada Central Park food kiosks."
+          },
+          {
+            name: "Festive Sunday Nacatamal",
+            svg: `<svg viewBox="0 0 100 100" class="w-14 h-14"><rect width="100" height="100" rx="20" fill="#FEF3C7"/><rect x="25" y="42" width="50" height="24" rx="4" fill="#166534"/><path d="M25 54H75" stroke="#FDE68A" stroke-width="3"/><path d="M42 42V66" stroke="#FDE68A" stroke-width="3"/><circle cx="50" cy="54" r="5" fill="#CA8A04"/></svg>`,
+            origin: "Corn dough seasoned with lard and achiote, wrapped in plantain leaves with marinated pork, rice, potatoes, mint, and prunes, then steamed for hours.",
+            whereToEat: "Family homes and markets on Sunday mornings."
+          }
+        ],
+        ergTips: [
+          {
+            title: "🌋 Sacred Volcanic Spirit",
+            text: "In Nahuatl cosmology, Ometepe’s volcanoes were sacred dwellings of deities. Stay on marked trails and never remove petroglyph stones."
+          },
+          {
+            title: "🍫 Heritage Cacao Culture",
+            text: "Nicaragua produces fine organic cacao. Visit cooperative artisan chocolate ateliers in Granada to taste unrefined single-origin cacao nibs."
+          }
+        ]
+      }
+    };
+
     function filterByRegion(region) {
       currentRegion = region;
       const tabs = ['all', 'south', 'central'];
@@ -1698,6 +2481,7 @@
       document.getElementById('modalTitle').textContent = data.title;
       document.getElementById('modalSubtitle').textContent = data.subtitle;
 
+      // Populate Trail Steps
       const trailContainer = document.getElementById('trailStepsContainer');
       trailContainer.innerHTML = '';
       data.trail.forEach((step, idx) => {
@@ -1718,6 +2502,7 @@
         trailContainer.appendChild(stepEl);
       });
 
+      // Populate Food Items
       const foodContainer = document.getElementById('foodDishesContainer');
       foodContainer.innerHTML = '';
       data.foods.forEach(food => {
@@ -1741,6 +2526,7 @@
         foodContainer.appendChild(foodEl);
       });
 
+      // Populate ERG Tips
       const ergContainer = document.getElementById('ergTipsContainer');
       ergContainer.innerHTML = '';
       data.ergTips.forEach(tip => {
