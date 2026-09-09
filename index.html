@@ -1,0 +1,2304 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Roots & Horizons | Latin Heritage Cultural Travel Guide • MongoDB Latin Heritage ERG</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Calistoga and Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Calistoga&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Calistoga"', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            mongo: {
+              green: '#00ED64',
+              dark: '#001E2B',
+              forest: '#023430',
+              slate: '#0C2340',
+              mist: '#E8EDEB',
+            },
+            terracotta: {
+              50: '#FAF5F0',
+              100: '#F4ECE1',
+              200: '#E7D5C1',
+              500: '#D9653B',
+              600: '#C04E26',
+              800: '#7E2C11',
+            },
+            agave: {
+              400: '#2DB38D',
+              600: '#097956',
+              800: '#064E3B',
+            },
+            sun: {
+              300: '#FDE047',
+              400: '#FACC15',
+              500: '#EAB308',
+              600: '#CA8A04',
+            },
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #FAF7F2;
+      background-image: radial-gradient(#E2DACF 1px, transparent 1px), radial-gradient(#E2DACF 1px, #FAF7F2 1px);
+      background-size: 40px 40px;
+      background-position: 0 0, 20px 20px;
+      color: #1F2937;
+    }
+    .paper-card {
+      background: #FFFFFF;
+      border: 1.5px solid #E5DCCE;
+      box-shadow: 4px 5px 0px 0px #D8CBBB;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .paper-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 6px 8px 0px 0px #C8B8A4;
+    }
+    .badge-tag {
+      box-shadow: 2px 2px 0px 0px rgba(0,0,0,0.15);
+    }
+    .interactive-card {
+      cursor: pointer;
+    }
+    .interactive-card:active {
+      transform: scale(0.99);
+    }
+    .modal-backdrop {
+      background-color: rgba(0, 30, 43, 0.78);
+      backdrop-filter: blur(6px);
+    }
+    @keyframes modalPop {
+      0% { opacity: 0; transform: scale(0.95) translateY(10px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .animate-modal {
+      animation: modalPop 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #FAF7F2;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #D9653B;
+      border-radius: 4px;
+    }
+    @media print {
+      .no-print { display: none !important; }
+      body { background: white; }
+      .paper-card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    }
+  </style>
+</head>
+
+<body class="font-sans antialiased selection:bg-terracotta-500 selection:text-white">
+
+  <header class="sticky top-0 z-40 bg-mongo-dark/95 backdrop-blur-md border-b border-mongo-forest/40 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-xl bg-mongo-forest flex items-center justify-center border border-mongo-green/30 shadow-inner">
+          <svg class="w-5 h-5 text-mongo-green" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C12 2 4.5 9.5 4.5 15.5C4.5 19.64 7.86 23 12 23C16.14 23 19.5 19.64 19.5 15.5C19.5 9.5 12 2 12 2ZM12 20.8C9.35 20.8 7.2 18.65 7.2 16C7.2 12.65 11.25 6.95 12 5.91C12.75 6.95 16.8 12.65 16.8 16C16.8 18.65 14.65 20.8 12 20.8Z"/>
+          </svg>
+        </div>
+        <div>
+          <span class="text-xs font-semibold uppercase tracking-wider text-mongo-green">MongoDB Employee Resource Group</span>
+          <h1 class="text-sm sm:text-base font-bold tracking-tight text-white flex items-center gap-1.5">
+            Latin Heritage Month <span class="text-terracotta-500">•</span> Cultural Travel Guide
+          </h1>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2 sm:gap-3">
+        <button onclick="window.print()" class="no-print inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-mongo-dark bg-amber-200 hover:bg-amber-300 rounded-lg transition-all shadow-sm">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4H7v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+          <span class="hidden sm:inline">Print / Save PDF</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section class="relative overflow-hidden py-14 sm:py-20 border-b border-[#E5DCCE] bg-gradient-to-b from-[#F3ECE0] via-[#FAF7F2] to-[#FAF7F2]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        
+        <div class="lg:col-span-7 space-y-5">
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-terracotta-100 border border-terracotta-200 text-terracotta-800 text-xs font-semibold uppercase tracking-wider">
+            <span>🌎 Cultural Celebration Edition</span>
+            <span class="w-1.5 h-1.5 rounded-full bg-terracotta-600"></span>
+            <span>12 Curated Living Heritages</span>
+          </div>
+
+          <h2 class="font-serif text-4xl sm:text-5xl lg:text-6xl text-mongo-dark leading-[1.12]">
+            Roots, Colors & <br />
+            <span class="text-terracotta-600 italic">Latin Horizons</span>
+          </h2>
+
+          <p class="text-base sm:text-lg text-gray-700 leading-relaxed max-w-2xl font-normal">
+            Crafted by the <strong class="text-mongo-forest font-semibold">MongoDB Latin Heritage ERG</strong>, this guide invites you to explore indigenous cosmology, time-honored foodways, and the lush biodiversity of South and Central America. More than tourist itineraries, these are stories of belonging, resilience, and warm hospitality to inspire your next cultural journey.
+          </p>
+
+          <!-- 3-Way Departure Origin Switcher -->
+          <div class="p-4 rounded-2xl bg-white border border-[#E1D6C5] shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4 max-w-2xl">
+            <div>
+              <span class="text-xs font-bold text-gray-500 uppercase tracking-wide block">Estimated Cost Calculator (USD)</span>
+              <p class="text-xs text-gray-600">Choose your departure origin to dynamically recalculate airfare & totals:</p>
+            </div>
+            <div class="inline-flex flex-wrap p-1 bg-stone-100 rounded-xl border border-stone-300 gap-1 self-start sm:self-auto" id="originButtonGroup">
+              <button onclick="setFlightOrigin('US')" id="btnOriginUS" class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-mongo-forest text-white transition-all shadow-sm">
+                🇺🇸 US Departure
+              </button>
+              <button onclick="setFlightOrigin('SA')" id="btnOriginSA" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-stone-600 hover:text-stone-900 transition-all">
+                ⛰️ South America
+              </button>
+              <button onclick="setFlightOrigin('CA')" id="btnOriginCA" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-stone-600 hover:text-stone-900 transition-all">
+                🌴 Central America
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Illustrated Hero Feature Banner -->
+        <div class="lg:col-span-5 flex justify-center">
+          <div class="relative w-full max-w-md">
+            <div class="paper-card p-6 rounded-3xl relative overflow-hidden bg-gradient-to-tr from-[#FFFDF9] via-[#FAF4EA] to-[#FCEFD9]">
+              <div class="flex justify-between items-center pb-4 border-b border-dashed border-stone-300 mb-4">
+                <div class="flex items-center gap-2">
+                  <span class="text-2xl">🌿</span>
+                  <div>
+                    <h3 class="font-serif text-sm font-bold text-stone-800">Culture Passport</h3>
+                    <p class="text-[10px] text-stone-500">MongoDB Latin Heritage Network</p>
+                  </div>
+                </div>
+                <div class="w-12 h-12 rounded-full border-2 border-dashed border-terracotta-500 flex items-center justify-center text-terracotta-600 font-bold text-[10px] transform rotate-12">
+                  EXPLORE
+                </div>
+              </div>
+
+              <!-- Vector Art Landscape -->
+              <div class="h-48 w-full rounded-2xl bg-[#D6E6F2] relative overflow-hidden border border-stone-200 flex items-end justify-center">
+                <svg class="w-full h-full" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect width="360" height="200" fill="#FCE9CF"/>
+                  <circle cx="180" cy="95" r="44" fill="#FBBF24" opacity="0.9"/>
+                  <path d="M-20 200L70 90L160 200H-20Z" fill="#C2410C" opacity="0.75"/>
+                  <path d="M100 200L190 70L280 200H100Z" fill="#7C2D12" opacity="0.85"/>
+                  <path d="M220 200L290 110L380 200H220Z" fill="#9A3412" opacity="0.7"/>
+                  <path d="M190 70L174 95L185 91L190 97L196 90L206 95L190 70Z" fill="#FFFFFF"/>
+                  <path d="M-10 200Q80 150 180 170Q280 190 370 160V200H-10Z" fill="#047857"/>
+                  <path d="M-10 200Q90 170 200 180Q310 190 370 175V200H-10Z" fill="#064E3B"/>
+                  <circle cx="45" cy="165" r="8" fill="#F59E0B"/>
+                  <circle cx="310" cy="160" r="10" fill="#F59E0B"/>
+                </svg>
+                <div class="absolute bottom-2 left-3 bg-black/60 backdrop-blur-xs text-white text-[10px] font-semibold px-2 py-0.5 rounded-md">
+                  Andean Peaks & Tropical Rainforests
+                </div>
+              </div>
+
+              <!-- Quick Highlights Badges -->
+              <div class="grid grid-cols-3 gap-2 mt-4 text-center">
+                <div class="p-2 rounded-xl bg-amber-50 border border-amber-200">
+                  <span class="block text-xs font-bold text-amber-900">8 Countries</span>
+                  <span class="text-[10px] text-amber-700">South & Central</span>
+                </div>
+                <div class="p-2 rounded-xl bg-emerald-50 border border-emerald-200">
+                  <span class="block text-xs font-bold text-emerald-900">Flavors</span>
+                  <span class="text-[10px] text-emerald-700">Ancestral Roots</span>
+                </div>
+                <div class="p-2 rounded-xl bg-sky-50 border border-sky-200">
+                  <span class="block text-xs font-bold text-sky-900">Journeys</span>
+                  <span class="text-[10px] text-sky-700">Living Heritage</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 no-print">
+    <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 p-4 rounded-2xl bg-white border border-[#E5DCCE] shadow-sm">
+      
+      <!-- Region Filter Tabs -->
+      <div class="flex flex-wrap items-center gap-2">
+        <span class="text-xs font-bold uppercase text-stone-500 tracking-wider mr-1">Region:</span>
+        <button onclick="filterByRegion('all')" id="filter-btn-all" class="filter-tab px-3.5 py-1.5 text-xs font-bold rounded-xl bg-mongo-forest text-white transition-all shadow-xs">
+          All (12)
+        </button>
+        <button onclick="filterByRegion('south')" id="filter-btn-south" class="filter-tab px-3.5 py-1.5 text-xs font-bold rounded-xl bg-stone-100 text-stone-700 hover:bg-stone-200 transition-all">
+          ⛰️ South America (8)
+        </button>
+        <button onclick="filterByRegion('central')" id="filter-btn-central" class="filter-tab px-3.5 py-1.5 text-xs font-bold rounded-xl bg-stone-100 text-stone-700 hover:bg-stone-200 transition-all">
+          🌴 Central America (4)
+        </button>
+      </div>
+
+      <!-- Country Dropdown & Search Filter -->
+      <div class="flex flex-wrap items-center gap-3">
+        <div class="flex items-center gap-1.5">
+          <label for="countrySelect" class="text-xs font-bold uppercase text-stone-500 tracking-wider">Country:</label>
+          <select 
+            id="countrySelect" 
+            onchange="handleFilterChange()" 
+            class="text-xs px-3 py-2 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-terracotta-500 bg-stone-50 text-stone-800 font-medium"
+          >
+            <option value="all">All Countries</option>
+            <option value="peru">🇵🇪 Peru</option>
+            <option value="colombia">🇨🇴 Colombia</option>
+            <option value="chile">🇨🇱 Chile</option>
+            <option value="bolivia">🇧🇴 Bolivia</option>
+            <option value="argentina">🇦🇷 Argentina</option>
+            <option value="brazil">🇧🇷 Brazil</option>
+            <option value="ecuador">🇪🇨 Ecuador</option>
+            <option value="guatemala">🇬🇹 Guatemala</option>
+            <option value="costarica">🇨🇷 Costa Rica</option>
+            <option value="panama">🇵🇦 Panama</option>
+            <option value="nicaragua">🇳🇮 Nicaragua</option>
+          </select>
+        </div>
+
+        <input 
+          type="text" 
+          id="searchInput" 
+          oninput="handleFilterChange()"
+          placeholder="Search city, country, or dish..." 
+          class="w-full sm:w-60 text-xs px-3.5 py-2 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-terracotta-500 focus:border-transparent bg-stone-50"
+        />
+      </div>
+
+    </div>
+  </section>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="destinationsContainer">
+      
+      <!-- DESTINATION 1: CUSCO (PERU) -->
+      <article class="destination-card paper-card rounded-3xl overflow-hidden flex flex-col justify-between" data-region="south" data-country="peru" data-search="peru cusco machu picchu sacred valley ceviche lomo saltado pachamama quechua inca">
+        <div>
+          <div class="h-44 w-full bg-gradient-to-r from-amber-700 via-orange-800 to-red-900 relative p-4 flex flex-col justify-between text-white">
+            <svg class="absolute inset-0 w-full h-full opacity-30 mix-blend-overlay" viewBox="0 0 100 100" preserveAspectRatio="none">
+              <polygon points="0,100 30,30 60,100" fill="#FFF"/>
+              <polygon points="40,100 75,15 100,100" fill="#FFF"/>
+            </svg>
+            <div class="flex justify-between items-start z-10">
+              <span class="badge-tag px-2.5 py-1 rounded-lg text-[11px] font-extrabold uppercase tracking-wide bg-amber-400 text-stone-950">
+                🇵🇪 Peru • Sacred Andes
+              </span>
+              <span class="text-xs bg-black/40 px-2 py-0.5 rounded-full font-medium backdrop-blur-xs">South America</span>
+            </div>
+            <div class="z-10">
+              <h3 class="font-serif text-2xl font-bold leading-tight">Cusco & Sacred Valley</h3>
+              <p class="text-xs text-amber-200">The navel of the Inca universe and living Quechua cosmology</p>
+            </div>
+          </div>
+
+          <div class="p-6 space-y-4">
+            <div>
+              <h4 class="text-xs font-bold uppercase tracking-wider text-terracotta-600 mb-1">Why It Is Essential</h4>
+              <p class="text-xs text-stone-700 leading-relaxed">
+                Ancient capital of the Inca Empire (Tawantinsuyu), Cusco marries megalithic stone foundations with Spanish colonial woodwork, keeping ancient Quechua agricultural wisdom vibrant in Pisac and Ollantaytambo.
+              </p>
+            </div>
+
+            <div class="p-3.5 rounded-2xl bg-[#F9F6F0] border border-[#E9DFCE]">
+              <div class="flex items-center gap-1.5 text-xs font-bold text-stone-900 mb-1.5">
+                <span>🍲</span> Ancestral Flavors
+              </div>
+              <ul class="text-[11px] text-stone-600 space-y-1">
+                <li>• <strong>Highland Trout Ceviche:</strong> Glacial river fish cured in citrus leche de tigre with giant choclo corn.</li>
+                <li>• <strong>Lomo Saltado:</strong> Stir-fried beef tenderloin with ají amarillo and Cantonese wok roots.</li>
+                <li>• <strong>Chicha Morada:</strong> Refreshing purple corn brew infused with cloves, cinnamon, and spiced apple.</li>
+              </ul>
+            </div>
+
+            <div>
+              <div class="flex items-center gap-1.5 text-xs font-bold text-stone-900 mb-1">
+                <span>🕯️</span> Living Lore & Curiosity
+              </div>
+              <p class="text-[11px] text-stone-600 leading-relaxed">
+                During <em>Pachamama Raymi</em> (Mother Earth month in August), locals place coca leaves and grains into anti-seismic stone fissures, celebrating cosmic equilibrium and ecological renewal.
+              </p>
+            </div>
+
+            <div>
+              <div class="flex items-center gap-1.5 text-xs font-bold text-stone-900 mb-1">
+                <span>🥾</span> Essential Experiences
+              </div>
+              <p class="text-[11px] text-stone-600">
+                Boarding the panoramic train to Machu Picchu; walking the stepped salineras of Maras; discovering Qorikancha Sun Temple.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-5 border-t border-[#EBDDC9] bg-[#FAF6F0] space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-bold uppercase tracking-wide text-stone-500">7-Day Estimated Total</span>
+            <span class="text-base font-serif font-bold text-mongo-forest total-cost" data-us="1480" data-sa="1310" data-ca="1410">$1,480 USD</span>
+          </div>
+          <div class="grid grid-cols-3 gap-1 text-[10px] text-stone-600">
+            <div class="bg-white p-1.5 rounded-lg border border-stone-200">
+              <span class="text-gray-400 block">Flight (Est.)</span>
+              <strong class="flight-cost" data-us="550" data-sa="380" data-ca="480">$550 USD</strong>
+            </div>
+            <div class="bg-white p-1.5 rounded-lg border border-stone-200">
+              <span class="text-gray-400 block">Hotel / night</span>
+              <strong>$75 - $130</strong>
+            </div>
+            <div class="bg-white p-1.5 rounded-lg border border-stone-200">
+              <span class="text-gray-400 block">Food / day</span>
+              <strong>$25 - $45</strong>
+            </div>
+          </div>
+          <button type="button" onclick="openDestinationModal('cusco')" class="w-full mt-2 py-2 px-3 rounded-xl bg-mongo-forest hover:bg-terracotta-600 text-white font-semibold text-xs transition-all shadow-sm flex items-center justify-center gap-1.5 group">
+            <span>🧭 Explore Trail & Illustrated Dishes</span>
+            <span class="transition-transform group-hover:translate-x-1">→</span>
+          </button>
+        </div>
+      </article>
+
+      <!-- DESTINATION 2: CARTAGENA (COLOMBIA) -->
+      <article class="destination-card paper-card rounded-3xl overflow-hidden flex flex-col justify-between" data-region="south" data-country="colombia" data-search="colombia cartagena san andres caribbean arepas encanto afrocolombian gabriel garcia marquez rosario">
+        <div>
+          <div class="h-44 w-full bg-gradient-to-r from-emerald-600 via-teal-700 to-cyan-800 relative p-4 flex flex-col justify-between text-white">
+            <div class="flex justify-between items-start z-10">
+              <span class="badge-tag px-2.5 py-1 rounded-lg text-[11px] font-extrabold uppercase tracking-wide bg-amber-300 text-stone-950">
+                🇨🇴 Colombia • Caribbean
+              </span>
+              <span class="text-xs bg-black/40 px-2 py-0.5 rounded-full font-medium backdrop-blur-xs">South America</span>
+            </div>
+            <div class="z-10">
+              <h3 class="font-serif text-2xl font-bold leading-tight">Cartagena & Rosario Islands</h3>
+              <p class="text-xs text-teal-200">Colonial ramparts, champeta beats, and magical realism</p>
+            </div>
+          </div>
+
+          <div class="p-6 space-y-4">
+            <div>
+              <h4 class="text-xs font-bold uppercase tracking-wider text-terracotta-600 mb-1">Why It Is Essential</h4>
+              <p class="text-xs text-stone-700 leading-relaxed">
+                Cartagena guards the maritime heart of the Colombian Caribbean. Beyond bougainvillea balconies and Getsemaní murals, the dignity of <em>palenqueras</em> and Gabo’s literary legacy come alive.
+              </p>
+            </div>
+
+            <div class="p-3.5 rounded-2xl bg-[#F9F6F0] border border-[#E9DFCE]">
+              <div class="flex items-center gap-1.5 text-xs font-bold text-stone-900 mb-1.5">
+                <span>🍲</span> Ancestral Flavors
+              </div>
+              <ul class="text-[11px] text-stone-600 space-y-1">
+                <li>• <strong>Arepa de Huevo:</strong> Twice-fried golden corn pocket filled with an egg and seasoned ground meat.</li>
+                <li>• <strong>Pargo Rojo con Arroz con Coco:</strong> Crispy whole red snapper served with coconut rice and fried patacones.</li>
+                <li>• <strong>Posta Negra Cartagenera:</strong> Slow-simmered beef in a caramelized panela sugarcane and allspice reduction.</li>
+              </ul>
+            </div>
+
+            <div>
+              <div class="flex items-center gap-1.5 text-xs font-bold text-stone-900 mb-1">
+                <span>🕯️</span> Living Lore & Curiosity
+              </div>
+              <p class="text-[11px] text-stone-600 leading-relaxed">
+                Just outside the city lies <em>San Basilio de Palenque</em>, the first free town in the Americas founded by escaped enslaved people in 1603, boasting its own Creole tongue and polyrhythmic drum culture.
+              </p>
+            </div>
+
+            <div>
+              <div class="flex items-center gap-1.5 text-xs font-bold text-stone-900 mb-1">
+                <span>🥾</span> Essential Experiences
+              </div>
+              <p class="text-[11px] text-stone-600">
+                Sunset viewing over the historic ramparts at Café del Mar; street art walking tour in Getsemaní; speedboat journey to the turquoise waters of Barú and Rosario Islands.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-5 border-t border-[#EBDDC9] bg-[#FAF6F0] space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-bold uppercase tracking-wide text-stone-500">7-Day Estimated Total</span>
+            <span class="text-base font-serif font-bold text-mongo-forest total-cost" data-us="1320" data-sa="1350" data-ca="1260">$1,320 USD</span>
+          </div>
+          <div class="grid grid-cols-3 gap-1 text-[10px] text-stone-600">
+            <div class="bg-white p-1.5 rounded-lg border border-stone-200">
+              <span class="text-gray-400 block">Flight (Est.)</span>
+              <strong class="flight-cost" data-us="420" data-sa="450" data-ca="360">$420 USD</strong>
+            </div>
+            <div class="bg-white p-1.5 rounded-lg border border-stone-200">
+              <span class="text-gray-400 block">Hotel / night</span>
+              <strong>$70 - $120</strong>
+            </div>
+            <div class="bg-white p-1.5 rounded-lg border border-stone-200">
+              <span class="text-gray-400 block">Food / day</span>
+              <strong>$25 - $40</strong>
+            </div>
+          </div>
+          <button type="button" onclick="openDestinationModal('cartagena')" class="w-full mt-2 py-2 px-3 rounded-xl bg-mongo-forest hover:bg-terracotta-600 text-white font-semibold text-xs transition-all shadow-sm flex items-center justify-center gap-1.5 group">
+            <span>🧭 Explore Trail & Illustrated Dishes</span>
+            <span class="transition-transform group-hover:translate-x-1">→</span>
+          </button>
+        </div>
+      </article>
+
+      <!-- DESTINATION 3: ATACAMA DESERT (CHILE) -->
+      <article class="destination-card paper-card rounded-3xl overflow-hidden flex flex-col justify-between" data-region="south" data-country="chile" data-search="chile atacama san pedro desert salt flat geysers stars astronomy licanantay">
+        <div>
+          <div class="h-44 w-full bg-gradient-to-r from-stone-800 via-amber-900 to-indigo-950 relative p-4 flex flex-col justify-between text-white">
+            <div class="flex justify-between items-start z-10">
+              <span class="badge-tag px-2.5 py-1 rounded-lg text-[11px] font-extrabold uppercase tracking-wide bg-amber-400 text-stone-950">
+                🇨🇱 Chile • Altiplano
+              </span>
+              <span class="text-xs bg-black/40 px-2 py-0.5 rounded-full font-medium backdrop-blur-xs">South America</span>
+            </div>
+            <div class="z-10">
+              <h3 class="font-serif text-2xl font-bold leading-tight">Atacama Desert</h3>
+              <p class="text-xs text-amber-200">The clearest cosmos on Earth and Licanantay lore</p>
+            </div>
+          </div>
+
+          <div class="p-6 space-y-4">
+            <div>
+              <h4 class="text-xs font-bold uppercase tracking-wider text-terracotta-600 mb-1">Why It Is Essential</h4>
+              <p class="text-xs text-stone-700 leading-relaxed">
+                The driest non-polar desert on Earth surprises with turquoise salt lakes dotted with flamingos, bubbling geyser fields at 4,300m, and adobe hamlets preserved under zero light pollution.
+              </p>
+            </div>
+
+            <div class="p-3.5 rounded-2xl bg-[#F9F6F0] border border-[#E9DFCE]">
+              <div class="flex items-center gap-1.5 text-xs font-bold text-stone-900 mb-1.5">
+                <span>🍲</span> Ancestral Flavors
+              </div>
+              <ul class="text-[11px] text-stone-600 space-y-1">
+                <li>• <strong>Pastel de Choclo:</strong> Sweet baked corn pie layered over seasoned beef, chicken, and black olives.</li>
+                <li>• <strong>Rica-Rica Herbal Gelato:</strong> Dessert infused with the fragrant wild altiplano mint-sage shrub.</li>
+                <li>• <strong>Cazuela de Llama / Trout:</strong> Comforting earthenware hotpots made with highland vegetables.</li>
+              </ul>
+            </div>
+
+            <div>
+              <div class="flex items-center gap-1.5 text-xs font-bold text-stone-900 mb-1">
+                <span>🕯️</span> Living Lore & Curiosity
+              </div>
+              <p class="text-[11px] text-stone-600 leading-relaxed">
+                The Licanantay people read the "Dark Constellations"—the cosmic silhouettes of interstellar dust inside the Milky Way—looking for the Celestial Llama to set the planting cycle.
+              </p>
+            </div>
+
+            <div>
+              <div class="flex items-center gap-1.5 text-xs font-bold text-stone-900 mb-1">
+                <span>🥾</span> Essential Experiences
+              </div>
+              <p class="text-[11px] text-stone-600">
+                Nighttime deep-sky telescope tour; relaxing in Puritama thermal pools; watching the dawn steam plumes at El Tatio Geysers.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-5 border-t border-[#EBDDC9] bg-[#FAF6F0] space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-bold uppercase tracking-wide text-stone-500">7-Day Estimated Total</span>
+            <span class="text-base font-serif font-bold text-mongo-forest total-cost" data-us="1790" data-sa="1500" data-ca="1730">$1,790 USD</span>
+          </div>
+          <div class="grid grid-cols-3 gap-1 text-[10px] text-stone-600">
+            <div class="bg-white p-1.5 rounded-lg border border-stone-200">
+              <span class="text-gray-400 block">Flight (Est.)</span>
+              <strong class="flight-cost" data-us="680" data-sa="390" data-ca="620">$680 USD</strong>
+            </div>
+            <div class="bg-white p-1.5 rounded-lg border border-stone-200">
+              <span class="text-gray-400 block">Hotel / night</span>
+              <strong>$90 - $160</strong>
+            </div>
+            <div class="bg-white p-1.5 rounded-lg border border-stone-200">
+              <span class="text-gray-400 block">Food / day</span>
+              <strong>$35 - $60</strong>
+            </div>
+          </div>
+          <button type="button" onclick="openDestinationModal('atacama')" class="w-full mt-2 py-2 px-3 rounded-xl bg-mongo-forest hover:bg-terracotta-600 text-white font-semibold text-xs transition-all shadow-sm flex items-center justify-center gap-1.5 group">
+            <span>🧭 Explore Trail & Illustrated Dishes</span>
+            <span class="transition-transform group-hover:translate-x-1">→</span>
+          </button>
+        </div>
+      </article>
+
+      <!-- DESTINATION 4: UYUNI & POTOSÍ (BOLIVIA) -->
+      <article class="destination-card paper-card rounded-3xl overflow-hidden flex flex-col justify-between" data-region="south" data-country="bolivia" data-search="bolivia uyuni potosi salt flat aymara mirror incahuasi quinoa saltenas">
+        <div>
+          <div class="h-44 w-full bg-gradient-to-r from-sky-400 via-indigo-600 to-slate-900 relative p-4 flex flex-col justify-between text-white">
+            <div class="flex justify-between items-start z-10">
+              <span class="badge-tag px-2.5 py-1 rounded-lg text-[11px] font-extrabold uppercase tracking-wide bg-yellow-300 text-stone-950">
+                🇧🇴 Bolivia • Altiplano
+              </span>
+              <span class="text-xs bg-black/40 px-2 py-0.5 rounded-full font-medium backdrop-blur-xs">South America</span>
+            </div>
+            <div class="z-10">
+              <h3 class="font-serif text-2xl font-bold leading-tight">Salar de Uyuni & Potosí</h3>
+              <p class="text-xs text-sky-200">The world’s largest water mirror and silver lore</p>
+            </div>
+          </div>
+
+          <div class="p-6 space-y-4">
+            <div>
+              <h4 class="text-xs font-bold uppercase tracking-wider text-terracotta-600 mb-1">Why It Is Essential</h4>
+              <p class="text-xs text-stone-700 leading-relaxed">
+                Over 10,000 km² of brilliant white salt that becomes an infinite mirror during the rainy season. Coupled with Potosí’s historic Cerro Rico, it reveals the historical pulse and Aymara soul of Bolivia.
+              </p>
+            </div>
+
+            <div class="p-3.5 rounded-2xl bg-[#F9F6F0] border border-[#E9DFCE]">
+              <div class="flex items-center gap-1.5 text-xs font-bold text-stone-900 mb-1.5">
+                <span>🍲</span> Ancestral Flavors
+              </div>
+              <ul class="text-[11px] text-stone-600 space-y-1">
+                <li>• <strong>Bolivian Salteñas:</strong> Golden braided pastries filled with seasoned piping-hot broth and beef.</li>
+                <li>• <strong>Royal Quinoa Chowder:</strong> Sacred altiplano grain simmered with Andean vegetables and muña herbs.</li>
+                <li>• <strong>Pique Macho:</strong> Mountain-sized platter of sliced beef tenderloin, sausage, fries, and spicy locoto.</li>
+              </ul>
+            </div>
+
+            <div>
+              <div class="flex items-center gap-1.5 text-xs font-bold text-stone-900 mb-1">
+                <span>🕯️</span> Living Lore & Curiosity
+              </div>
+              <p class="text-[11px] text-stone-600 leading-relaxed">
+                On Incahuasi Island, 700-year-old giant cacti grow over prehistoric fossilized coral. In Potosí, miners still offer coca leaves and spirits to <em>El Tío</em>, guardian deity of the deep earth.
+              </p>
+            </div>
+
+            <div>
+              <div class="flex items-center gap-1.5 text-xs font-bold text-stone-900 mb-1">
+                <span>🥾</span> Essential Experiences
+              </div>
+              <p class="text-[11px] text-stone-600">
+                3-day 4x4 expedition to the Red and Green lagoons; sleeping in a hotel built entirely with salt blocks; optical perspective photography on the salt desert.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-5 border-t border-[#EBDDC9] bg-[#FAF6F0] space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-bold uppercase tracking-wide text-stone-500">7-Day Estimated Total</span>
+            <span class="text-base font-serif font-bold text-mongo-forest total-cost" data-us="1290" data-sa="1100" data-ca="1230">$1,290 USD</span>
+          </div>
+          <div class="grid grid-cols-3 gap-1 text-[10px] text-stone-600">
+            <div class="bg-white p-1.5 rounded-lg border border-stone-200">
+              <span class="text-gray-400 block">Flight (Est.)</span>
+              <strong class="flight-cost" data-us="650" data-sa="460" data-ca="590">$650 USD</strong>
+            </div>
+            <div class="bg-white p-1.5 rounded-lg border border-stone-200">
+              <span class="text-gray-400 block">Hotel / night</span>
+              <strong>$45 - $90</strong>
+            </div>
+            <div class="bg-white p-1.5 rounded-lg border border-stone-200">
+              <span class="text-gray-400 block">Food / day</span>
+              <strong>$15 - $30</strong>
+            </div>
+          </div>
+          <button type="button" onclick="openDestinationModal('uyuni')" class="w-full mt-2 py-2 px-3 rounded-xl bg-mongo-forest hover:bg-terracotta-600 text-white font-semibold text-xs transition-all shadow-sm flex items-center justify-center gap-1.5 group">
+            <span>🧭 Explore Trail & Illustrated Dishes</span>
+            <span class="transition-transform group-hover:translate-x-1">→</span>
+          </button>
+        </div>
+      </article>
+
+      <!-- DESTINATION 5: MENDOZA (ARGENTINA) -->
+      <article class="destination-card paper-card rounded-3xl overflow-hidden flex flex-col justify-between" data-region="south" data-country="argentina" data-search="argentina mendoza malbec andes mountain aconcagua empanadas asado gaucho wine">
+        <div>
+          <div class="h-44 w-full bg-gradient-to-r from-purple-900 via-rose-900 to-amber-950 relative p-4 flex flex-col justify-between text-white">
+            <div class="flex justify-between items-start z-10">
+              <span class="badge-tag px-2.5 py-1 rounded-lg text-[11px] font-extrabold uppercase tracking-wide bg-rose-400 text-stone-950">
+                🇦🇷 Argentina • Cuyo
+              </span>
+              <span class="text-xs bg-black/40 px-2 py-0.5 rounded-full font-medium backdrop-blur-xs">South America</span>
+            </div>
+            <div class="z-10">
+              <h3 class="font-serif text-2xl font-bold leading-tight">Mendoza & The Andes</h3>
+              <p class="text-xs text-rose-200">Malbec in the shadow of the mighty Aconcagua</p>
+            </div>
+          </div>
+
+          <div class="p-6 space-y-4">
+            <div>
+              <h4 class="text-xs font-bold uppercase tracking-wider text-terracotta-600 mb-1">Why It Is Essential</h4>
+              <p class="text-xs text-stone-700 leading-relaxed">
+                An oasis irrigated by ancient channels engineered by the indigenous Huarpe people, crowned by the glaciated peaks of the Andes and home to the world's most acclaimed high-altitude Malbecs.
+              </p>
+            </div>
+
+            <div class="p-3.5 rounded-2xl bg-[#F9F6F0] border border-[#E9DFCE]">
+              <div class="flex items-center gap-1.5 text-xs font-bold text-stone-900 mb-1.5">
+                <span>🍲</span> Ancestral Flavors
+              </div>
+              <ul class="text-[11px] text-stone-600 space-y-1">
+                <li>• <strong>Asado Criollo:</strong> Prime beef grilled patiently over fragrant vine wood embers with fresh chimichurri.</li>
+                <li>• <strong>Empanadas Mendocinas:</strong> Flaky pastry stuffed with knife-cut beef, sweet onions, and green olives.</li>
+                <li>• <strong>Alfajor de Maizena:</strong> Delicate cornstarch cookies filled with dulce de leche and rolled in shredded coconut.</li>
+              </ul>
+            </div>
+
+            <div>
+              <div class="flex items-center gap-1.5 text-xs font-bold text-stone-900 mb-1">
+                <span>🕯️</span> Living Lore & Curiosity
+              </div>
+              <p class="text-[11px] text-stone-600 leading-relaxed">
+                The <em>Fiesta Nacional de la Vendimia</em> (each March) is one of the southern hemisphere's oldest harvest festivals, honoring how glacial meltwaters are transformed through community care into celebrated wine.
+              </p>
+            </div>
+
+            <div>
+              <div class="flex items-center gap-1.5 text-xs font-bold text-stone-900 mb-1">
+                <span>🥾</span> Essential Experiences
+              </div>
+              <p class="text-[11px] text-stone-600">
+                Biking between vineyard estates in Uco Valley; hiking to the South Face viewpoint in Aconcagua Provincial Park; hot springs soak in Cacheuta.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-5 border-t border-[#EBDDC9] bg-[#FAF6F0] space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-bold uppercase tracking-wide text-stone-500">7-Day Estimated Total</span>
+            <span class="text-base font-serif font-bold text-mongo-forest total-cost" data-us="1410" data-sa="1110" data-ca="1370">$1,410 USD</span>
+          </div>
+          <div class="grid grid-cols-3 gap-1 text-[10px] text-stone-600">
+            <div class="bg-white p-1.5 rounded-lg border border-stone-200">
+              <span class="text-gray-400 block">Flight (Est.)</span>
+              <strong class="flight-cost" data-us="620" data-sa="320" data-ca="580">$620 USD</strong>
+            </div>
+            <div class="bg-white p-1.5 rounded-lg border border-stone-200">
+              <span class="text-gray-400 block">Hotel / night</span>
+              <strong>$65 - $130</strong>
+            </div>
+            <div class="bg-white p-1.5 rounded-lg border border-stone-200">
+              <span class="text-gray-400 block">Food / day</span>
+              <strong>$25 - $45</strong>
+            </div>
+          </div>
+          <button type="button" onclick="openDestinationModal('mendoza')" class="w-full mt-2 py-2 px-3 rounded-xl bg-mongo-forest hover:bg-terracotta-600 text-white font-semibold text-xs transition-all shadow-sm flex items-center justify-center gap-1.5 group">
+            <span>🧭 Explore Trail & Illustrated Dishes</span>
+            <span class="transition-transform group-hover:translate-x-1">→</span>
+          </button>
+        </div>
+      </article>
+
+      <!-- DESTINATION 6: OURO PRETO (BRAZIL) -->
+      <article class="destination-card paper-card rounded-3xl overflow-hidden flex flex-col justify-between" data-region="south" data-country="brazil" data-search="brazil brasil ouro preto minas gerais baroque aleijadinho cheese bread feijao tropeiro">
+        <div>
+          <div class="h-44 w-full bg-gradient-to-r from-amber-800 via-yellow-700 to-emerald-900 relative p-4 flex flex-col justify-between text-white">
+            <div class="flex justify-between items-start z-10">
+              <span class="badge-tag px-2.5 py-1 rounded-lg text-[11px] font-extrabold uppercase tracking-wide bg-emerald-300 text-stone-950">
+                🇧🇷 Brazil • Minas Gerais
+              </span>
+              <span class="text-xs bg-black/40 px-2 py-0.5 rounded-full font-medium backdrop-blur-xs">South America</span>
+            </div>
+            <div class="z-10">
+              <h3 class="font-serif text-2xl font-bold leading-tight">Ouro Preto & Tiradentes</h3>
+              <p class="text-xs text-yellow-200">Soapstone baroque, Afro-Brazilian freedom, and cozy woodstoves</p>
+            </div>
+          </div>
+
+          <div class="p-6 space-y-4">
+            <div>
+              <h4 class="text-xs font-bold uppercase tracking-wider text-terracotta-600 mb-1">Why It Is Essential</h4>
+              <p class="text-xs text-stone-700 leading-relaxed">
+                A UNESCO World Heritage treasure where steep cobblestone streets preserve the sculpture genius of Aleijadinho and the resilience of enslaved African miners who funded their own brotherhood churches.
+              </p>
+            </div>
+
+            <div class="p-3.5 rounded-2xl bg-[#F9F6F0] border border-[#E9DFCE]">
+              <div class="flex items-center gap-1.5 text-xs font-bold text-stone-900 mb-1.5">
+                <span>🍲</span> Ancestral Flavors
+              </div>
+              <ul class="text-[11px] text-stone-600 space-y-1">
+                <li>• <strong>Feijão Tropeiro:</strong> Brown beans tossed with toasted manioc flour, pork crackling, collard greens, and eggs.</li>
+                <li>• <strong>Frango com Quiabo:</strong> Chicken slow-cooked in a traditional soapstone pan served with creamy polenta (angu).</li>
+                <li>• <strong>Artisanal Minas Cheese:</strong> Raw milk cheese aged on native wood planks with fresh pour-over coffee.</li>
+              </ul>
+            </div>
+
+            <div>
+              <div class="flex items-center gap-1.5 text-xs font-bold text-stone-900 mb-1">
+                <span>🕯️</span> Living Lore & Curiosity
+              </div>
+              <p class="text-[11px] text-stone-600 leading-relaxed">
+                The legend of Chico Rei tells of an enslaved African monarch who bought freedom for himself, his son, and dozens of workers by hiding gold flakes in his hair, subsequently commissioning the grand Church of Santa Efigênia.
+              </p>
+            </div>
+
+            <div>
+              <div class="flex items-center gap-1.5 text-xs font-bold text-stone-900 mb-1">
+                <span>🥾</span> Essential Experiences
+              </div>
+              <p class="text-[11px] text-stone-600">
+                Touring São Francisco de Assis church with ceilings by Mestre Ataíde; historic steam train to Mariana; visiting soapstone artisans.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-5 border-t border-[#EBDDC9] bg-[#FAF6F0] space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-bold uppercase tracking-wide text-stone-500">7-Day Estimated Total</span>
+            <span class="text-base font-serif font-bold text-mongo-forest total-cost" data-us="1450" data-sa="880" data-ca="1390">$1,450 USD</span>
+          </div>
+          <div class="grid grid-cols-3 gap-1 text-[10px] text-stone-600">
+            <div class="bg-white p-1.5 rounded-lg border border-stone-200">
+              <span class="text-gray-400 block">Flight (Est.)</span>
+              <strong class="flight-cost" data-us="750" data-sa="180" data-ca="690">$750 USD</strong>
+            </div>
+            <div class="bg-white p-1.5 rounded-lg border border-stone-200">
+              <span class="text-gray-400 block">Hotel / night</span>
+              <strong>$55 - $110</strong>
+            </div>
+            <div class="bg-white p-1.5 rounded-lg border border-stone-200">
+              <span class="text-gray-400 block">Food / day</span>
+              <strong>$20 - $35</strong>
+            </div>
+          </div>
+          <button type="button" onclick="openDestinationModal('ouropreto')" class="w-full mt-2 py-2 px-3 rounded-xl bg-mongo-forest hover:bg-terracotta-600 text-white font-semibold text-xs transition-all shadow-sm flex items-center justify-center gap-1.5 group">
+            <span>🧭 Explore Trail & Illustrated Dishes</span>
+            <span class="transition-transform group-hover:translate-x-1">→</span>
+          </button>
+        </div>
+      </article>
+
+      <!-- DESTINATION 7: GALAPAGOS & QUITO (ECUADOR) -->
+      <article class="destination-card paper-card rounded-3xl overflow-hidden flex flex-col justify-between" data-region="south" data-country="ecuador" data-search="ecuador galapagos quito darwin tortoises volcano mitad del mundo encebollado">
+        <div>
+          <div class="h-44 w-full bg-gradient-to-r from-teal-800 via-cyan-900 to-blue-950 relative p-4 flex flex-col justify-between text-white">
+            <div class="flex justify-between items-start z-10">
+              <span class="badge-tag px-2.5 py-1 rounded-lg text-[11px] font-extrabold uppercase tracking-wide bg-amber-400 text-stone-950">
+                🇪🇨 Ecuador • Pacific
+              </span>
+              <span class="text-xs bg-black/40 px-2 py-0.5 rounded-full font-medium backdrop-blur-xs">South America</span>
+            </div>
+            <div class="z-10">
+              <h3 class="font-serif text-2xl font-bold leading-tight">Galápagos & Quito</h3>
+              <p class="text-xs text-teal-200">The living evolutionary cradle and equatorial history</p>
+            </div>
+          </div>
+
+          <div class="p-6 space-y-4">
+            <div>
+              <h4 class="text-xs font-bold uppercase tracking-wider text-terracotta-600 mb-1">Why It Is Essential</h4>
+              <p class="text-xs text-stone-700 leading-relaxed">
+                Quito preserves the best-maintained colonial historic center in the Americas, while the volcanic Galápagos archipelago offers face-to-face encounters with wildlife found nowhere else on the globe.
+              </p>
+            </div>
+
+            <div class="p-3.5 rounded-2xl bg-[#F9F6F0] border border-[#E9DFCE]">
+              <div class="flex items-center gap-1.5 text-xs font-bold text-stone-900 mb-1.5">
+                <span>🍲</span> Ancestral Flavors
+              </div>
+              <ul class="text-[11px] text-stone-600 space-y-1">
+                <li>• <strong>Encebollado:</strong> Sustaining tuna soup made with cassava and tangy lime-marinated red onions.</li>
+                <li>• <strong>Locro de Papa:</strong> Velvety traditional Andean potato soup served with fresh cheese and avocado.</li>
+                <li>• <strong>Ceviche de Camarón:</strong> Sweet-and-tangy shrimp ceviche with citrus tomato broth and green plantain chifles.</li>
+              </ul>
+            </div>
+
+            <div>
+              <div class="flex items-center gap-1.5 text-xs font-bold text-stone-900 mb-1">
+                <span>🕯️</span> Living Lore & Curiosity
+              </div>
+              <p class="text-[11px] text-stone-600 leading-relaxed">
+                The giant tortoises that inspired Charles Darwin can live past 150 years. Shell shapes evolved distinctly on each island to match the precise height of local flora.
+              </p>
+            </div>
+
+            <div>
+              <div class="flex items-center gap-1.5 text-xs font-bold text-stone-900 mb-1">
+                <span>🥾</span> Essential Experiences
+              </div>
+              <p class="text-[11px] text-stone-600">
+                Snorkeling alongside sea lions in Los Túneles; standing with feet in both hemispheres at Mitad del Mundo; cable car ascent on Pichincha Volcano.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-5 border-t border-[#EBDDC9] bg-[#FAF6F0] space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-bold uppercase tracking-wide text-stone-500">7-Day Estimated Total</span>
+            <span class="text-base font-serif font-bold text-mongo-forest total-cost" data-us="2250" data-sa="2220" data-ca="2140">$2,250 USD</span>
+          </div>
+          <div class="grid grid-cols-3 gap-1 text-[10px] text-stone-600">
+            <div class="bg-white p-1.5 rounded-lg border border-stone-200">
+              <span class="text-gray-400 block">Flight + Island</span>
+              <strong class="flight-cost" data-us="750" data-sa="720" data-ca="640">$750 USD</strong>
+            </div>
+            <div class="bg-white p-1.5 rounded-lg border border-stone-200">
+              <span class="text-gray-400 block">Hotel / night</span>
+              <strong>$110 - $210</strong>
+            </div>
+            <div class="bg-white p-1.5 rounded-lg border border-stone-200">
+              <span class="text-gray-400 block">Food / day</span>
+              <strong>$35 - $60</strong>
+            </div>
+          </div>
+          <button type="button" onclick="openDestinationModal('galapagos')" class="w-full mt-2 py-2 px-3 rounded-xl bg-mongo-forest hover:bg-terracotta-600 text-white font-semibold text-xs transition-all shadow-sm flex items-center justify-center gap-1.5 group">
+            <span>🧭 Explore Trail & Illustrated Dishes</span>
+            <span class="transition-transform group-hover:translate-x-1">→</span>
+          </button>
+        </div>
+      </article>
+
+      <!-- DESTINATION 8: LENÇÓIS MARANHENSES (BRAZIL) -->
+      <article class="destination-card paper-card rounded-3xl overflow-hidden flex flex-col justify-between" data-region="south" data-country="brazil" data-search="brazil brasil lencois maranhenses sao luis dunes bumba meu boi cuxa rice">
+        <div>
+          <div class="h-44 w-full bg-gradient-to-r from-amber-600 via-sky-600 to-blue-700 relative p-4 flex flex-col justify-between text-white">
+            <div class="flex justify-between items-start z-10">
+              <span class="badge-tag px-2.5 py-1 rounded-lg text-[11px] font-extrabold uppercase tracking-wide bg-emerald-300 text-stone-950">
+                🇧🇷 Brazil • Maranhão
+              </span>
+              <span class="text-xs bg-black/40 px-2 py-0.5 rounded-full font-medium backdrop-blur-xs">South America</span>
+            </div>
+            <div class="z-10">
+              <h3 class="font-serif text-2xl font-bold leading-tight">Lençóis & São Luís</h3>
+              <p class="text-xs text-sky-200">Rolling quartz dunes, rainwater oases, and Afro-folkloric drums</p>
+            </div>
+          </div>
+
+          <div class="p-6 space-y-4">
+            <div>
+              <h4 class="text-xs font-bold uppercase tracking-wider text-terracotta-600 mb-1">Why It Is Essential</h4>
+              <p class="text-xs text-stone-700 leading-relaxed">
+                A singular geological phenomenon: 155,000 hectares of sweeping white dunes embracing thousands of emerald seasonal rainwater lagoons, alongside São Luís, a cultural capital adorned with Azulejo ceramic tiles.
+              </p>
+            </div>
+
+            <div class="p-3.5 rounded-2xl bg-[#F9F6F0] border border-[#E9DFCE]">
+              <div class="flex items-center gap-1.5 text-xs font-bold text-stone-900 mb-1.5">
+                <span>🍲</span> Ancestral Flavors
+              </div>
+              <ul class="text-[11px] text-stone-600 space-y-1">
+                <li>• <strong>Arroz de Cuxá:</strong> Indigenous rice cooked with tart vinagreira roselle greens, dried shrimp, and sesame.</li>
+                <li>• <strong>Maranhense Shrimp Pie:</strong> Savory baked pie filled with coastal herbs, shrimp, and coconut milk.</li>
+                <li>• <strong>Bacuri & Cupuaçu Sorbet:</strong> Fragrant native wild fruits from the Amazon-Cerrado transition.</li>
+              </ul>
+            </div>
+
+            <div>
+              <div class="flex items-center gap-1.5 text-xs font-bold text-stone-900 mb-1">
+                <span>🕯️</span> Living Lore & Curiosity
+              </div>
+              <p class="text-[11px] text-stone-600 leading-relaxed">
+                The <em>Bumba Meu Boi</em> and the fire-warmed rhythm of <em>Tambor de Crioula</em> are UNESCO Intangible Cultural Heritages, celebrating community rebirth through song and swirling skirts.
+              </p>
+            </div>
+
+            <div>
+              <div class="flex items-center gap-1.5 text-xs font-bold text-stone-900 mb-1">
+                <span>🥾</span> Essential Experiences
+              </div>
+              <p class="text-[11px] text-stone-600">
+                Swimming in Lagoa Bonita and Lagoa Azul; floating down the crystalline Formiga River in Cardosa; wandering the colonial center of São Luís.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-5 border-t border-[#EBDDC9] bg-[#FAF6F0] space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-bold uppercase tracking-wide text-stone-500">7-Day Estimated Total</span>
+            <span class="text-base font-serif font-bold text-mongo-forest total-cost" data-us="1490" data-sa="990" data-ca="1440">$1,490 USD</span>
+          </div>
+          <div class="grid grid-cols-3 gap-1 text-[10px] text-stone-600">
+            <div class="bg-white p-1.5 rounded-lg border border-stone-200">
+              <span class="text-gray-400 block">Flight (Est.)</span>
+              <strong class="flight-cost" data-us="760" data-sa="260" data-ca="710">$760 USD</strong>
+            </div>
+            <div class="bg-white p-1.5 rounded-lg border border-stone-200">
+              <span class="text-gray-400 block">Hotel / night</span>
+              <strong>$60 - $120</strong>
+            </div>
+            <div class="bg-white p-1.5 rounded-lg border border-stone-200">
+              <span class="text-gray-400 block">Food / day</span>
+              <strong>$20 - $35</strong>
+            </div>
+          </div>
+          <button type="button" onclick="openDestinationModal('lencois')" class="w-full mt-2 py-2 px-3 rounded-xl bg-mongo-forest hover:bg-terracotta-600 text-white font-semibold text-xs transition-all shadow-sm flex items-center justify-center gap-1.5 group">
+            <span>🧭 Explore Trail & Illustrated Dishes</span>
+            <span class="transition-transform group-hover:translate-x-1">→</span>
+          </button>
+        </div>
+      </article>
+
+      <!-- DESTINATION 9: ANTIGUA & LAKE ATITLÁN (GUATEMALA) -->
+      <article class="destination-card paper-card rounded-3xl overflow-hidden flex flex-col justify-between" data-region="central" data-country="guatemala" data-search="guatemala antigua atitlan maya coffee volcano pepian weaving textiles">
+        <div>
+          <div class="h-44 w-full bg-gradient-to-r from-amber-700 via-teal-800 to-emerald-950 relative p-4 flex flex-col justify-between text-white">
+            <div class="flex justify-between items-start z-10">
+              <span class="badge-tag px-2.5 py-1 rounded-lg text-[11px] font-extrabold uppercase tracking-wide bg-amber-300 text-stone-950">
+                🇬🇹 Guatemala • Highlands
+              </span>
+              <span class="text-xs bg-black/40 px-2 py-0.5 rounded-full font-medium backdrop-blur-xs">Central America</span>
+            </div>
+            <div class="z-10">
+              <h3 class="font-serif text-2xl font-bold leading-tight">Antigua & Lake Atitlán</h3>
+              <p class="text-xs text-amber-200">Sacred crater volcanoes and ancestral backstrap weaving</p>
+            </div>
+          </div>
+
+          <div class="p-6 space-y-4">
+            <div>
+              <h4 class="text-xs font-bold uppercase tracking-wider text-terracotta-600 mb-1">Why It Is Essential</h4>
+              <p class="text-xs text-stone-700 leading-relaxed">
+                Framed by three volcanoes, Atitlán is ringed by twelve villages keeping Kaqchikel and Tz’utujil tongues alive with handmade textiles. Nearby Antigua pairs colonial ruins with artisanal single-origin chocolate.
+              </p>
+            </div>
+
+            <div class="p-3.5 rounded-2xl bg-[#F9F6F0] border border-[#E9DFCE]">
+              <div class="flex items-center gap-1.5 text-xs font-bold text-stone-900 mb-1.5">
+                <span>🍲</span> Ancestral Flavors
+              </div>
+              <ul class="text-[11px] text-stone-600 space-y-1">
+                <li>• <strong>Pepian de Pollo:</strong> Guatemala’s national Maya stew: chicken in a roasted squash seed, sesame, and mild chili sauce.</li>
+                <li>• <strong>Kak’ik:</strong> Ceremonial red turkey soup flavored with achiote, wild mint, and coriander.</li>
+                <li>• <strong>Rellenitos de Plátano:</strong> Sweet plantain fritters stuffed with chocolate-infused black bean paste.</li>
+              </ul>
+            </div>
+
+            <div>
+              <div class="flex items-center gap-1.5 text-xs font-bold text-stone-900 mb-1">
+                <span>🕯️</span> Living Lore & Curiosity
+              </div>
+              <p class="text-[11px] text-stone-600 leading-relaxed">
+                In Santiago Atitlán, locals venerate <em>Maximón</em> (San Simón), a syncretic folk saint and deity who receives cigars, colorful candles, and spirits in exchange for family protection.
+              </p>
+            </div>
+
+            <div>
+              <div class="flex items-center gap-1.5 text-xs font-bold text-stone-900 mb-1">
+                <span>🥾</span> Essential Experiences
+              </div>
+              <p class="text-[11px] text-stone-600">
+                Lancha boat tour between lakeside villages; botanical natural dye weaving workshop; roasting marshmallows on Pacaya Volcano’s lava fields.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-5 border-t border-[#EBDDC9] bg-[#FAF6F0] space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-bold uppercase tracking-wide text-stone-500">7-Day Estimated Total</span>
+            <span class="text-base font-serif font-bold text-mongo-forest total-cost" data-us="1260" data-sa="1440" data-ca="1070">$1,260 USD</span>
+          </div>
+          <div class="grid grid-cols-3 gap-1 text-[10px] text-stone-600">
+            <div class="bg-white p-1.5 rounded-lg border border-stone-200">
+              <span class="text-gray-400 block">Flight (Est.)</span>
+              <strong class="flight-cost" data-us="380" data-sa="560" data-ca="190">$380 USD</strong>
+            </div>
+            <div class="bg-white p-1.5 rounded-lg border border-stone-200">
+              <span class="text-gray-400 block">Hotel / night</span>
+              <strong>$55 - $100</strong>
+            </div>
+            <div class="bg-white p-1.5 rounded-lg border border-stone-200">
+              <span class="text-gray-400 block">Food / day</span>
+              <strong>$20 - $35</strong>
+            </div>
+          </div>
+          <button type="button" onclick="openDestinationModal('antigua')" class="w-full mt-2 py-2 px-3 rounded-xl bg-mongo-forest hover:bg-terracotta-600 text-white font-semibold text-xs transition-all shadow-sm flex items-center justify-center gap-1.5 group">
+            <span>🧭 Explore Trail & Illustrated Dishes</span>
+            <span class="transition-transform group-hover:translate-x-1">→</span>
+          </button>
+        </div>
+      </article>
+
+      <!-- DESTINATION 10: MONTEVERDE (COSTA RICA) -->
+      <article class="destination-card paper-card rounded-3xl overflow-hidden flex flex-col justify-between" data-region="central" data-country="costarica" data-search="costa rica monteverde nicoya pura vida cloud forest sloth gallo pinto ecotourism">
+        <div>
+          <div class="h-44 w-full bg-gradient-to-r from-emerald-700 via-green-800 to-teal-950 relative p-4 flex flex-col justify-between text-white">
+            <div class="flex justify-between items-start z-10">
+              <span class="badge-tag px-2.5 py-1 rounded-lg text-[11px] font-extrabold uppercase tracking-wide bg-emerald-400 text-stone-950">
+                🇨🇷 Costa Rica • Cloud Forest
+              </span>
+              <span class="text-xs bg-black/40 px-2 py-0.5 rounded-full font-medium backdrop-blur-xs">Central America</span>
+            </div>
+            <div class="z-10">
+              <h3 class="font-serif text-2xl font-bold leading-tight">Monteverde & Nicoya</h3>
+              <p class="text-xs text-emerald-200">Pura Vida philosophy and cloud canopy biodiversity</p>
+            </div>
+          </div>
+
+          <div class="p-6 space-y-4">
+            <div>
+              <h4 class="text-xs font-bold uppercase tracking-wider text-terracotta-600 mb-1">Why It Is Essential</h4>
+              <p class="text-xs text-stone-700 leading-relaxed">
+                A world pioneer in regenerative ecotourism and renewable energy, Costa Rica harbors over 5% of the planet's biodiversity. Monteverde envelops you in hanging canopy bridges nestled within clouds.
+              </p>
+            </div>
+
+            <div class="p-3.5 rounded-2xl bg-[#F9F6F0] border border-[#E9DFCE]">
+              <div class="flex items-center gap-1.5 text-xs font-bold text-stone-900 mb-1.5">
+                <span>🍲</span> Ancestral Flavors
+              </div>
+              <ul class="text-[11px] text-stone-600 space-y-1">
+                <li>• <strong>Gallo Pinto:</strong> Black beans and rice tossed with Salsa Lizano, fresh cilantro, and sweet peppers.</li>
+                <li>• <strong>Casado:</strong> Balanced worker’s lunch with meat or fish, rice, beans, plantains, and queso frito.</li>
+                <li>• <strong>Chifrijo:</strong> Sizzling pork cracklings over tender red beans, avocado slices, and chimichurri.</li>
+              </ul>
+            </div>
+
+            <div>
+              <div class="flex items-center gap-1.5 text-xs font-bold text-stone-900 mb-1">
+                <span>🕯️</span> Living Lore & Curiosity
+              </div>
+              <p class="text-[11px] text-stone-600 leading-relaxed">
+                The neighboring Nicoya Peninsula is one of Earth's rare <em>Blue Zones</em>, where community members routinely pass 100 years of age with high vitality, nourished by active movement and social purpose.
+              </p>
+            </div>
+
+            <div>
+              <div class="flex items-center gap-1.5 text-xs font-bold text-stone-900 mb-1">
+                <span>🥾</span> Essential Experiences
+              </div>
+              <p class="text-[11px] text-stone-600">
+                Canopy walk across suspension bridges; spotting the Resplendent Quetzal and sloths; bathing in volcanic thermal waters near Arenal.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-5 border-t border-[#EBDDC9] bg-[#FAF6F0] space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-bold uppercase tracking-wide text-stone-500">7-Day Estimated Total</span>
+            <span class="text-base font-serif font-bold text-mongo-forest total-cost" data-us="1490" data-sa="1650" data-ca="1290">$1,490 USD</span>
+          </div>
+          <div class="grid grid-cols-3 gap-1 text-[10px] text-stone-600">
+            <div class="bg-white p-1.5 rounded-lg border border-stone-200">
+              <span class="text-gray-400 block">Flight (Est.)</span>
+              <strong class="flight-cost" data-us="420" data-sa="580" data-ca="220">$420 USD</strong>
+            </div>
+            <div class="bg-white p-1.5 rounded-lg border border-stone-200">
+              <span class="text-gray-400 block">Hotel / night</span>
+              <strong>$80 - $140</strong>
+            </div>
+            <div class="bg-white p-1.5 rounded-lg border border-stone-200">
+              <span class="text-gray-400 block">Food / day</span>
+              <strong>$30 - $50</strong>
+            </div>
+          </div>
+          <button type="button" onclick="openDestinationModal('monteverde')" class="w-full mt-2 py-2 px-3 rounded-xl bg-mongo-forest hover:bg-terracotta-600 text-white font-semibold text-xs transition-all shadow-sm flex items-center justify-center gap-1.5 group">
+            <span>🧭 Explore Trail & Illustrated Dishes</span>
+            <span class="transition-transform group-hover:translate-x-1">→</span>
+          </button>
+        </div>
+      </article>
+
+      <!-- DESTINATION 11: PANAMA CITY & GUNA YALA (PANAMA) -->
+      <article class="destination-card paper-card rounded-3xl overflow-hidden flex flex-col justify-between" data-region="central" data-country="panama" data-search="panama casco viejo san blas guna yala canal mola caribbean sancocho">
+        <div>
+          <div class="h-44 w-full bg-gradient-to-r from-blue-700 via-amber-600 to-red-800 relative p-4 flex flex-col justify-between text-white">
+            <div class="flex justify-between items-start z-10">
+              <span class="badge-tag px-2.5 py-1 rounded-lg text-[11px] font-extrabold uppercase tracking-wide bg-blue-300 text-stone-950">
+                🇵🇦 Panama • Two Oceans
+              </span>
+              <span class="text-xs bg-black/40 px-2 py-0.5 rounded-full font-medium backdrop-blur-xs">Central America</span>
+            </div>
+            <div class="z-10">
+              <h3 class="font-serif text-2xl font-bold leading-tight">Casco Antiguo & Guna Yala</h3>
+              <p class="text-xs text-amber-100">Interoceanic crossroads and indigenous Caribbean autonomy</p>
+            </div>
+          </div>
+
+          <div class="p-6 space-y-4">
+            <div>
+              <h4 class="text-xs font-bold uppercase tracking-wider text-terracotta-600 mb-1">Why It Is Essential</h4>
+              <p class="text-xs text-stone-700 leading-relaxed">
+                The vital land bridge connecting the Americas. Unites the metropolitan and colonial charm of Casco Antiguo with the sacred archipelago of San Blas (Guna Yala), 365 coral islands governed with total autonomy by the Guna people.
+              </p>
+            </div>
+
+            <div class="p-3.5 rounded-2xl bg-[#F9F6F0] border border-[#E9DFCE]">
+              <div class="flex items-center gap-1.5 text-xs font-bold text-stone-900 mb-1.5">
+                <span>🍲</span> Ancestral Flavors
+              </div>
+              <ul class="text-[11px] text-stone-600 space-y-1">
+                <li>• <strong>Sancocho Panameño:</strong> Chicken soup simmered with native culantro herb and hearty ñame yams.</li>
+                <li>• <strong>Rondón:</strong> Caribbean seafood chowder simmered in fresh coconut milk, plantains, and sweet peppers.</li>
+                <li>• <strong>Carimañolas:</strong> Crispy mashed cassava croquettes stuffed with seasoned ground beef.</li>
+              </ul>
+            </div>
+
+            <div>
+              <div class="flex items-center gap-1.5 text-xs font-bold text-stone-900 mb-1">
+                <span>🕯️</span> Living Lore & Curiosity
+              </div>
+              <p class="text-[11px] text-stone-600 leading-relaxed">
+                Guna women craft <em>Molas</em>, intricate multi-layered reverse appliqué textiles portraying rainforest cosmology that helped preserve their sovereignty in the 1925 Dule Revolution.
+              </p>
+            </div>
+
+            <div>
+              <div class="flex items-center gap-1.5 text-xs font-bold text-stone-900 mb-1">
+                <span>🥾</span> Essential Experiences
+              </div>
+              <p class="text-[11px] text-stone-600">
+                Watching container ships rise through Miraflores Locks on the Panama Canal; island-hopping in San Blas; rooftop dining in Casco Viejo.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-5 border-t border-[#EBDDC9] bg-[#FAF6F0] space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-bold uppercase tracking-wide text-stone-500">7-Day Estimated Total</span>
+            <span class="text-base font-serif font-bold text-mongo-forest total-cost" data-us="1420" data-sa="1480" data-ca="1230">$1,420 USD</span>
+          </div>
+          <div class="grid grid-cols-3 gap-1 text-[10px] text-stone-600">
+            <div class="bg-white p-1.5 rounded-lg border border-stone-200">
+              <span class="text-gray-400 block">Flight (Est.)</span>
+              <strong class="flight-cost" data-us="430" data-sa="490" data-ca="240">$430 USD</strong>
+            </div>
+            <div class="bg-white p-1.5 rounded-lg border border-stone-200">
+              <span class="text-gray-400 block">Hotel / cabana</span>
+              <strong>$75 - $130</strong>
+            </div>
+            <div class="bg-white p-1.5 rounded-lg border border-stone-200">
+              <span class="text-gray-400 block">Food / day</span>
+              <strong>$25 - $45</strong>
+            </div>
+          </div>
+          <button type="button" onclick="openDestinationModal('panama')" class="w-full mt-2 py-2 px-3 rounded-xl bg-mongo-forest hover:bg-terracotta-600 text-white font-semibold text-xs transition-all shadow-sm flex items-center justify-center gap-1.5 group">
+            <span>🧭 Explore Trail & Illustrated Dishes</span>
+            <span class="transition-transform group-hover:translate-x-1">→</span>
+          </button>
+        </div>
+      </article>
+
+      <!-- DESTINATION 12: OMETEPE & GRANADA (NICARAGUA) -->
+      <article class="destination-card paper-card rounded-3xl overflow-hidden flex flex-col justify-between" data-region="central" data-country="nicaragua" data-search="nicaragua granada ometepe lake volcano petroglyphs vigoron cacao">
+        <div>
+          <div class="h-44 w-full bg-gradient-to-r from-amber-600 via-orange-700 to-stone-900 relative p-4 flex flex-col justify-between text-white">
+            <div class="flex justify-between items-start z-10">
+              <span class="badge-tag px-2.5 py-1 rounded-lg text-[11px] font-extrabold uppercase tracking-wide bg-amber-400 text-stone-950">
+                🇳🇮 Nicaragua • Great Lakes
+              </span>
+              <span class="text-xs bg-black/40 px-2 py-0.5 rounded-full font-medium backdrop-blur-xs">Central America</span>
+            </div>
+            <div class="z-10">
+              <h3 class="font-serif text-2xl font-bold leading-tight">Granada & Ometepe Island</h3>
+              <p class="text-xs text-amber-200">Twin volcanic cones rising from a freshwater sea</p>
+            </div>
+          </div>
+
+          <div class="p-6 space-y-4">
+            <div>
+              <h4 class="text-xs font-bold uppercase tracking-wider text-terracotta-600 mb-1">Why It Is Essential</h4>
+              <p class="text-xs text-stone-700 leading-relaxed">
+                An hourglass-shaped island formed by two volcanoes (Concepción and Maderas) in Lake Cocibolca. Next door, Granada is among Central America’s most colorful and welcoming colonial settlements.
+              </p>
+            </div>
+
+            <div class="p-3.5 rounded-2xl bg-[#F9F6F0] border border-[#E9DFCE]">
+              <div class="flex items-center gap-1.5 text-xs font-bold text-stone-900 mb-1.5">
+                <span>🍲</span> Ancestral Flavors
+              </div>
+              <ul class="text-[11px] text-stone-600 space-y-1">
+                <li>• <strong>Vigorón:</strong> Steamed cassava topped with crunchy pork chicharrón and pickled cabbage on banana leaves.</li>
+                <li>• <strong>Nacatamal:</strong> Festive corn dough steamed with seasoned pork, potatoes, rice, and prunes in banana leaves.</li>
+                <li>• <strong>Frescos de Cacao con Leche:</strong> Creamy drink of roasted cacao beans with cinnamon and toasted grains.</li>
+              </ul>
+            </div>
+
+            <div>
+              <div class="flex items-center gap-1.5 text-xs font-bold text-stone-900 mb-1">
+                <span>🕯️</span> Living Lore & Curiosity
+              </div>
+              <p class="text-[11px] text-stone-600 leading-relaxed">
+                Lake Ometepe is the only freshwater lake in the world harboring adapted bull sharks. Across the island, hundreds of pre-Columbian petroglyphs remain carved into sacred basalt stones.
+              </p>
+            </div>
+
+            <div>
+              <div class="flex items-center gap-1.5 text-xs font-bold text-stone-900 mb-1">
+                <span>🥾</span> Essential Experiences
+              </div>
+              <p class="text-[11px] text-stone-600">
+                Kayaking the tranquil Rio Istián wetlands between volcanoes; swimming in Ojo de Agua springs; boating Granada’s 365 Isletas.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-5 border-t border-[#EBDDC9] bg-[#FAF6F0] space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-bold uppercase tracking-wide text-stone-500">7-Day Estimated Total</span>
+            <span class="text-base font-serif font-bold text-mongo-forest total-cost" data-us="1190" data-sa="1360" data-ca="950">$1,190 USD</span>
+          </div>
+          <div class="grid grid-cols-3 gap-1 text-[10px] text-stone-600">
+            <div class="bg-white p-1.5 rounded-lg border border-stone-200">
+              <span class="text-gray-400 block">Flight (Est.)</span>
+              <strong class="flight-cost" data-us="450" data-sa="620" data-ca="210">$450 USD</strong>
+            </div>
+            <div class="bg-white p-1.5 rounded-lg border border-stone-200">
+              <span class="text-gray-400 block">Hotel / night</span>
+              <strong>$40 - $80</strong>
+            </div>
+            <div class="bg-white p-1.5 rounded-lg border border-stone-200">
+              <span class="text-gray-400 block">Food / day</span>
+              <strong>$15 - $30</strong>
+            </div>
+          </div>
+          <button type="button" onclick="openDestinationModal('ometepe')" class="w-full mt-2 py-2 px-3 rounded-xl bg-mongo-forest hover:bg-terracotta-600 text-white font-semibold text-xs transition-all shadow-sm flex items-center justify-center gap-1.5 group">
+            <span>🧭 Explore Trail & Illustrated Dishes</span>
+            <span class="transition-transform group-hover:translate-x-1">→</span>
+          </button>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- Empty search feedback message -->
+    <div id="noResultsMsg" class="hidden text-center py-16">
+      <p class="text-4xl mb-3">🔍</p>
+      <h4 class="font-serif text-lg font-bold text-stone-800">No destinations found</h4>
+      <p class="text-xs text-stone-500">Try adjusting your region, country selection, or search term.</p>
+    </div>
+  </main>
+
+  <section class="bg-white border-t border-b border-[#E5DCCE] py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="text-xs font-bold uppercase tracking-wider text-terracotta-600">Belonging & Best Practices</span>
+        <h3 class="font-serif text-3xl font-bold text-stone-900 mt-1">Traveling as a Conscious Cultural Ally</h3>
+        <p class="text-xs sm:text-sm text-stone-600 mt-2">
+          For MongoDB, traveling means practicing empathy, patronizing local family businesses, and honoring indigenous communities who have stewarded these lands for millennia.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <div class="paper-card p-6 rounded-2xl">
+          <div class="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center text-xl mb-4">
+            🌾
+          </div>
+          <h4 class="font-serif text-lg font-bold text-stone-900 mb-2">Buy Directly from Artisans</h4>
+          <p class="text-xs text-stone-600 leading-relaxed">
+            When acquiring alpaca textiles in Peru or a <em>Mola</em> in Panama, respect the matrilineal time and lineage of weaving. Negotiate gently and acknowledge that handmade artifacts represent days of dedicated craft.
+          </p>
+        </div>
+
+        <div class="paper-card p-6 rounded-2xl">
+          <div class="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center text-xl mb-4">
+            🌱
+          </div>
+          <h4 class="font-serif text-lg font-bold text-stone-900 mb-2">Preserve Sacred Sanctuaries</h4>
+          <p class="text-xs text-stone-600 leading-relaxed">
+            Many archaeological complexes, volcanic craters, and lagoons are active altars for Quechua, Aymara, and Maya elders. Always ask permission before photographing individuals and leave rocks, fossils, and plants intact.
+          </p>
+        </div>
+
+        <div class="paper-card p-6 rounded-2xl">
+          <div class="w-10 h-10 rounded-xl bg-sky-100 flex items-center justify-center text-xl mb-4">
+            💬
+          </div>
+          <h4 class="font-serif text-lg font-bold text-stone-900 mb-2">Learn Indigenous Words</h4>
+          <p class="text-xs text-stone-600 leading-relaxed">
+            Sharing a sincere <em>"Pura Vida"</em> in Costa Rica, saying <em>"Sulpayki"</em> (thank you in Quechua), or greeting elders respectfully fosters human connections far more rewarding than any tour bus could provide.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Comparison Matrix Table -->
+      <div class="mt-14 overflow-x-auto">
+        <h4 class="font-serif text-xl font-bold text-stone-900 mb-4 flex items-center gap-2">
+          <span>📊</span> 7-Day Trip Planning Cost Matrix by Origin (USD)
+        </h4>
+        <table class="w-full text-left text-xs bg-[#FAF7F2] rounded-2xl border border-stone-300 overflow-hidden">
+          <thead class="bg-mongo-dark text-white text-[11px] uppercase tracking-wider">
+            <tr>
+              <th class="p-3">Destination & Country</th>
+              <th class="p-3">Region</th>
+              <th class="p-3">US Dep. Flight</th>
+              <th class="p-3">South Am. Flight</th>
+              <th class="p-3">Central Am. Flight</th>
+              <th class="p-3">Avg Hotel (7 nights)</th>
+              <th class="p-3">Recommended Vibe</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-stone-200 text-stone-700">
+            <tr class="hover:bg-amber-50/50">
+              <td class="p-3 font-semibold text-stone-900">🇵🇪 Cusco & Sacred Valley</td>
+              <td class="p-3">South America</td>
+              <td class="p-3">$550</td>
+              <td class="p-3">$380</td>
+              <td class="p-3">$480</td>
+              <td class="p-3">~$580</td>
+              <td class="p-3">Archaeology & High Andes Trekking</td>
+            </tr>
+            <tr class="hover:bg-amber-50/50">
+              <td class="p-3 font-semibold text-stone-900">🇨🇴 Cartagena & Rosario</td>
+              <td class="p-3">South America</td>
+              <td class="p-3">$420</td>
+              <td class="p-3">$450</td>
+              <td class="p-3">$360</td>
+              <td class="p-3">~$560</td>
+              <td class="p-3">Caribbean Islands & Colonial History</td>
+            </tr>
+            <tr class="hover:bg-amber-50/50">
+              <td class="p-3 font-semibold text-stone-900">🇨🇱 Atacama Desert</td>
+              <td class="p-3">South America</td>
+              <td class="p-3">$680</td>
+              <td class="p-3">$390</td>
+              <td class="p-3">$620</td>
+              <td class="p-3">~$770</td>
+              <td class="p-3">Astronomy & High Altiplano</td>
+            </tr>
+            <tr class="hover:bg-amber-50/50">
+              <td class="p-3 font-semibold text-stone-900">🇧🇴 Salar de Uyuni & Potosí</td>
+              <td class="p-3">South America</td>
+              <td class="p-3">$650</td>
+              <td class="p-3">$460</td>
+              <td class="p-3">$590</td>
+              <td class="p-3">~$420</td>
+              <td class="p-3">Surreal Salt Mirrors & Geotourism</td>
+            </tr>
+            <tr class="hover:bg-amber-50/50">
+              <td class="p-3 font-semibold text-stone-900">🇦🇷 Mendoza & The Andes</td>
+              <td class="p-3">South America</td>
+              <td class="p-3">$620</td>
+              <td class="p-3">$320</td>
+              <td class="p-3">$580</td>
+              <td class="p-3">~$630</td>
+              <td class="p-3">Viticulture & Mountain Cuisine</td>
+            </tr>
+            <tr class="hover:bg-amber-50/50">
+              <td class="p-3 font-semibold text-stone-900">🇧🇷 Ouro Preto & Tiradentes</td>
+              <td class="p-3">South America</td>
+              <td class="p-3">$750</td>
+              <td class="p-3">$180</td>
+              <td class="p-3">$690</td>
+              <td class="p-3">~$500</td>
+              <td class="p-3">Baroque Art & Afro-Diasporic Memory</td>
+            </tr>
+            <tr class="hover:bg-amber-50/50">
+              <td class="p-3 font-semibold text-stone-900">🇪🇨 Galápagos & Quito</td>
+              <td class="p-3">South America</td>
+              <td class="p-3">$750</td>
+              <td class="p-3">$720</td>
+              <td class="p-3">$640</td>
+              <td class="p-3">~$1,050</td>
+              <td class="p-3">Evolutionary Wildlife & Snorkeling</td>
+            </tr>
+            <tr class="hover:bg-amber-50/50">
+              <td class="p-3 font-semibold text-stone-900">🇧🇷 Lençóis Maranhenses</td>
+              <td class="p-3">South America</td>
+              <td class="p-3">$760</td>
+              <td class="p-3">$260</td>
+              <td class="p-3">$710</td>
+              <td class="p-3">~$560</td>
+              <td class="p-3">Dunes, Rainwater Lagoons & Folk Drums</td>
+            </tr>
+            <tr class="hover:bg-amber-50/50">
+              <td class="p-3 font-semibold text-stone-900">🇬🇹 Antigua & Lake Atitlán</td>
+              <td class="p-3">Central America</td>
+              <td class="p-3">$380</td>
+              <td class="p-3">$560</td>
+              <td class="p-3">$190</td>
+              <td class="p-3">~$510</td>
+              <td class="p-3">Living Maya Languages & Volcanoes</td>
+            </tr>
+            <tr class="hover:bg-amber-50/50">
+              <td class="p-3 font-semibold text-stone-900">🇨🇷 Monteverde & Nicoya</td>
+              <td class="p-3">Central America</td>
+              <td class="p-3">$420</td>
+              <td class="p-3">$580</td>
+              <td class="p-3">$220</td>
+              <td class="p-3">~$720</td>
+              <td class="p-3">Cloud Forest Canopies & Blue Zone</td>
+            </tr>
+            <tr class="hover:bg-amber-50/50">
+              <td class="p-3 font-semibold text-stone-900">🇵🇦 Casco Antiguo & Guna Yala</td>
+              <td class="p-3">Central America</td>
+              <td class="p-3">$430</td>
+              <td class="p-3">$490</td>
+              <td class="p-3">$240</td>
+              <td class="p-3">~$680</td>
+              <td class="p-3">Canal Feats & Sovereign Caribbean Cays</td>
+            </tr>
+            <tr class="hover:bg-amber-50/50">
+              <td class="p-3 font-semibold text-stone-900">🇳🇮 Granada & Ometepe</td>
+              <td class="p-3">Central America</td>
+              <td class="p-3">$450</td>
+              <td class="p-3">$620</td>
+              <td class="p-3">$210</td>
+              <td class="p-3">~$390</td>
+              <td class="p-3">Volcanic Lakes & Organic Cacao</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="text-[10px] text-stone-500 mt-2">
+          *Estimates in USD modeled for low-to-mid shoulder seasons in 3-to-4-star boutique lodgings with regional dining.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="bg-mongo-dark text-stone-300 py-12 border-t border-mongo-forest/50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="space-y-1 text-center md:text-left">
+          <div class="flex items-center justify-center md:justify-start gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-mongo-green"></span>
+            <span class="font-bold text-sm text-white tracking-wide">MongoDB Latin Heritage Employee Resource Group</span>
+          </div>
+          <p class="text-xs text-stone-400">Celebrating ancestral heritage, stories, and the future of our global team.</p>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-center gap-4 text-xs text-stone-400">
+          <span>Latin Heritage Month</span>
+          <span>•</span>
+          <span>Diversity, Equity & Inclusion</span>
+          <span>•</span>
+          <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="text-mongo-green hover:underline flex items-center gap-1 font-semibold">
+            ↑ Back to top
+          </button>
+        </div>
+      </div>
+      <div class="mt-8 pt-6 border-t border-stone-800 text-center text-[11px] text-stone-500">
+        Internal cultural material curated for collaboration and travel planning. MongoDB Latin Heritage ERG.
+      </div>
+    </div>
+  </footer>
+
+  <div id="destinationModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-3 sm:p-6 overflow-y-auto no-print" role="dialog" aria-modal="true">
+    <div class="fixed inset-0 modal-backdrop transition-opacity" onclick="closeDestinationModal()"></div>
+
+    <div class="relative w-full max-w-4xl bg-[#FAF7F2] rounded-3xl border-2 border-[#E1D4C3] shadow-2xl overflow-hidden z-10 my-auto animate-modal max-h-[92vh] flex flex-col">
+      
+      <!-- Modal Header -->
+      <div id="modalHeaderBg" class="p-6 sm:p-7 relative text-white bg-gradient-to-r from-stone-900 to-mongo-forest border-b border-white/10 shrink-0">
+        <button onclick="closeDestinationModal()" class="absolute top-5 right-5 w-9 h-9 rounded-full bg-black/40 hover:bg-black/70 text-white flex items-center justify-center transition-all text-base border border-white/20">
+          ✕
+        </button>
+        <div class="flex items-center gap-2 mb-2">
+          <span id="modalBadge" class="px-3 py-1 rounded-lg text-xs font-bold uppercase tracking-wider bg-amber-400 text-stone-950">
+            Heritage & Region
+          </span>
+          <span id="modalRegion" class="text-xs text-stone-300 font-medium bg-black/30 px-2 py-0.5 rounded-full">
+            Continent Area
+          </span>
+        </div>
+        <h3 id="modalTitle" class="font-serif text-2xl sm:text-3xl font-bold leading-tight">Destination Title</h3>
+        <p id="modalSubtitle" class="text-xs sm:text-sm text-stone-200 mt-1 max-w-xl">Inspiring subtitle</p>
+      </div>
+
+      <!-- Navigation Tabs inside Modal -->
+      <div class="flex border-b border-[#E1D4C3] bg-white px-6 overflow-x-auto gap-2 shrink-0">
+        <button onclick="switchModalTab('trail')" id="tab-btn-trail" class="py-3 px-3 text-xs font-bold border-b-2 border-mongo-forest text-mongo-forest flex items-center gap-1.5 transition-all whitespace-nowrap">
+          <span>🥾</span> Curated Daily Trail
+        </button>
+        <button onclick="switchModalTab('food')" id="tab-btn-food" class="py-3 px-3 text-xs font-bold border-b-2 border-transparent text-stone-500 hover:text-stone-900 flex items-center gap-1.5 transition-all whitespace-nowrap">
+          <span>🍲</span> Illustrated Food Menu
+        </button>
+        <button onclick="switchModalTab('erg')" id="tab-btn-erg" class="py-3 px-3 text-xs font-bold border-b-2 border-transparent text-stone-500 hover:text-stone-900 flex items-center gap-1.5 transition-all whitespace-nowrap">
+          <span>🌿</span> ERG Local Connection
+        </button>
+        <button onclick="switchModalTab('budget')" id="tab-btn-budget" class="py-3 px-3 text-xs font-bold border-b-2 border-transparent text-stone-500 hover:text-stone-900 flex items-center gap-1.5 transition-all whitespace-nowrap">
+          <span>💳</span> Budget Calculator
+        </button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="p-6 sm:p-8 overflow-y-auto space-y-6 flex-1 text-stone-800">
+        <!-- TAB 1: TRAIL -->
+        <div id="tab-content-trail" class="space-y-6">
+          <div class="bg-amber-50/70 border border-amber-200/80 rounded-2xl p-4 flex items-start gap-3">
+            <span class="text-2xl">🧭</span>
+            <div>
+              <h5 class="text-xs font-bold uppercase tracking-wider text-amber-900">4-Step Immersive Cultural Itinerary</h5>
+              <p class="text-xs text-amber-800 mt-0.5">Designed to balance community encounters, walking routes, and sacred heritage appreciation.</p>
+            </div>
+          </div>
+          <div id="trailStepsContainer" class="space-y-4"></div>
+        </div>
+
+        <!-- TAB 2: FOOD -->
+        <div id="tab-content-food" class="hidden space-y-6">
+          <div class="bg-emerald-50/70 border border-emerald-200/80 rounded-2xl p-4 flex items-start gap-3">
+            <span class="text-2xl">🎨</span>
+            <div>
+              <h5 class="text-xs font-bold uppercase tracking-wider text-emerald-900">Illustrated Ancestral Dishes</h5>
+              <p class="text-xs text-emerald-800 mt-0.5">The cultural symbolism, native crops, and authentic locations to savor each dish.</p>
+            </div>
+          </div>
+          <div id="foodDishesContainer" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+        </div>
+
+        <!-- TAB 3: ERG TIPS -->
+        <div id="tab-content-erg" class="hidden space-y-4">
+          <div id="ergTipsContainer" class="space-y-4"></div>
+        </div>
+
+        <!-- TAB 4: BUDGET -->
+        <div id="tab-content-budget" class="hidden space-y-5">
+          <div class="p-5 rounded-2xl bg-white border border-[#E5DCCE] space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-stone-200">
+              <div>
+                <span class="text-xs font-bold text-stone-500 uppercase tracking-wide">Active Calculation Basis</span>
+                <h5 id="modalBudgetCurrentOrigin" class="font-serif text-lg font-bold text-mongo-dark">US Departure Estimate</h5>
+              </div>
+              <div>
+                <span class="text-xs text-stone-500">7-Day Total Estimate</span>
+                <p id="modalBudgetGrandTotal" class="font-serif text-2xl font-bold text-mongo-forest">$0 USD</p>
+              </div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="budgetMetricsGrid"></div>
+            <div class="p-4 rounded-xl bg-stone-50 border border-stone-200 text-xs text-stone-600 space-y-1.5">
+              <p class="font-semibold text-stone-800">💡 Currency & Payment Tip:</p>
+              <p id="modalCurrencyTip">Insight text</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="p-4 bg-[#F2ECE1] border-t border-[#E1D4C3] flex items-center justify-between shrink-0">
+        <span class="text-[11px] text-stone-600 flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-mongo-green"></span>
+          Latin Heritage Month • MongoDB ERG Knowledge Hub
+        </span>
+        <button onclick="closeDestinationModal()" class="px-4 py-2 text-xs font-bold rounded-xl bg-stone-200 hover:bg-stone-300 text-stone-800 transition-all">
+          Close Guide
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    let currentOrigin = 'US'; // 'US', 'SA', or 'CA'
+    let currentRegion = 'all'; // 'all', 'south', 'central'
+    let currentCountry = 'all';
+    let currentModalDestId = null;
+
+    const destinationDetailsData = {
+      cusco: {
+        badge: "🇵🇪 Peru • Sacred Andes",
+        region: "South America",
+        title: "Cusco & Sacred Valley",
+        subtitle: "Inca trails, high-altitude terrace engineering, and Quechua cosmology",
+        costs: {
+          flightUS: 550, flightSA: 380, flightCA: 480,
+          hotelNight: "$75 - $130", foodDay: "$25 - $45",
+          tours: "$280 (Boleto Turístico + Machu Picchu Scenic Train)",
+          totalUS: 1480, totalSA: 1310, totalCA: 1410,
+          currencyTip: "Carry Peruvian Soles (PEN) in small bills for artisan markets in Pisac and Ollantaytambo."
+        },
+        trail: [
+          { day: "Day 1 • Acclimatization & 12-Angled Stone", icon: "🏛️", desc: "Leisurely walk through San Blas artisan neighborhood, inspect the mortarless Inca stonework, and drink restorative coca leaf tea at San Pedro Market (3,400m)." },
+          { day: "Day 2 • Concentric Terraces of Moray & Maras", icon: "⛰️", desc: "Explore the agricultural microclimates of Moray and walk the 3,000 stepped pink salt pans of Maras, fed by an ancient thermal saltwater spring." },
+          { day: "Day 3 • Machu Picchu Sanctuary at Dawn", icon: "🌄", desc: "Board the morning train along the Urubamba River canyon to Aguas Calientes, ascending the Inca citadel as mountain mist lifts." },
+          { day: "Day 4 • Textile Mastery in Chinchero", icon: "🧶", desc: "Hands-on workshop with Quechua weavers demonstrating natural wool washing with saqta root and dyeing with cochineal and wildflowers." }
+        ],
+        foods: [
+          {
+            name: "Highland Glacial Trout Ceviche",
+            svg: `<svg viewBox="0 0 100 100" class="w-16 h-16"><circle cx="50" cy="50" r="44" fill="#FEE2E2"/><path d="M20 52C20 68 34 80 50 80C66 80 80 68 80 52H20Z" fill="#C2410C"/><ellipse cx="50" cy="52" rx="30" ry="12" fill="#FED7AA"/><circle cx="42" cy="50" r="5" fill="#F87171"/><circle cx="56" cy="53" r="6" fill="#FB923C"/><path d="M45 42L55 46" stroke="#16A34A" stroke-width="3" stroke-linecap="round"/><circle cx="50" cy="62" r="4" fill="#FACC15"/></svg>`,
+            origin: "Fresh river trout cured in brisk lime and aromatic leche de tigre with giant Andean choclo and glazed sweet potato.",
+            whereToEat: "Traditional picanterías in Cusco or San Pedro Market."
+          },
+          {
+            name: "Lomo Saltado with Ají Amarillo",
+            svg: `<svg viewBox="0 0 100 100" class="w-16 h-16"><rect width="100" height="100" rx="20" fill="#FEF3C7"/><path d="M15 65Q50 85 85 65" stroke="#78350F" stroke-width="8" fill="none" stroke-linecap="round"/><ellipse cx="50" cy="50" rx="26" ry="15" fill="#B45309"/><rect x="36" y="42" width="28" height="6" rx="3" fill="#DC2626"/><rect x="42" y="52" width="20" height="5" rx="2" fill="#F59E0B"/><path d="M50 30L53 38" stroke="#10B981" stroke-width="3"/></svg>`,
+            origin: "Peruvian-Chinese wok flambé with beef tenderloin strips, red onion, tomatoes, and yellow chili peppers.",
+            whereToEat: "Cicciolina or local restaurants in Ollantaytambo."
+          }
+        ],
+        ergTips: [
+          { title: "🌱 Pachamama Respect & High Altitudes", text: "Take your first day slowly with deep hydration. Leave natural artifacts intact and respect ritual spaces." },
+          { title: "🗣️ Meaningful Greeting in Quechua", text: "Greeting people with 'Allillanchu' (How are you?) and replying 'Allillanmi' (I am well!) bridges genuine connection." }
+        ]
+      },
+
+      cartagena: {
+        badge: "🇨🇴 Colombia • Caribbean Ramparts",
+        region: "South America",
+        title: "Cartagena & Rosario Islands",
+        subtitle: "Colonial stone walls, Afro-Caribbean drums, and sea breezes",
+        costs: {
+          flightUS: 420, flightSA: 450, flightCA: 360,
+          hotelNight: "$70 - $120", foodDay: "$25 - $40",
+          tours: "$190 (Rosario Islands Speedboat + Palenque Heritage Tour)",
+          totalUS: 1320, totalSA: 1350, totalCA: 1260,
+          currencyTip: "Colombian Pesos (COP) are used. Always negotiate boat transfers or taxi fares prior to boarding."
+        },
+        trail: [
+          { day: "Day 1 • Stroll Along the Walled City", icon: "🏰", desc: "Wander through the bougainvillea-draped balconies of San Diego and watch the sun dip into the ocean from Baluarte Santo Domingo." },
+          { day: "Day 2 • Community Arts in Getsemaní", icon: "🎨", desc: "Discover historic street art honoring independence heroines and dance champeta with neighborhood locals in Plaza de la Trinidad." },
+          { day: "Day 3 • Snorkeling the Rosario Archipelago", icon: "⛵", desc: "Boat journey to coral reefs and secluded white-sand beaches with a beachfront coconut rice and fried snapper lunch." },
+          { day: "Day 4 • Roots of Freedom in Palenque", icon: "🥁", desc: "Visit San Basilio de Palenque to learn about the Creole dialect, herbal medicine, and polyrhythmic drum legacies." }
+        ],
+        foods: [
+          {
+            name: "Arepa de Huevo Costeña",
+            svg: `<svg viewBox="0 0 100 100" class="w-16 h-16"><circle cx="50" cy="50" r="40" fill="#FEF08A"/><circle cx="50" cy="50" r="32" fill="#EAB308"/><circle cx="50" cy="50" r="16" fill="#F97316"/><circle cx="48" cy="48" r="8" fill="#FACC15"/></svg>`,
+            origin: "Crisp yellow corn arepa double-fried: first to puff, then sliced to receive a raw egg and beef filling before frying golden.",
+            whereToEat: "Plaza de San Diego or Las Bóvedas market stalls."
+          },
+          {
+            name: "Posta Negra Cartagenera",
+            svg: `<svg viewBox="0 0 100 100" class="w-16 h-16"><rect width="100" height="100" rx="20" fill="#F5F5F4"/><ellipse cx="50" cy="55" rx="34" ry="18" fill="#44403C"/><path d="M25 50C25 40 40 38 50 38C65 38 75 40 75 50C65 56 35 56 25 50Z" fill="#1C1917"/><circle cx="50" cy="45" r="4" fill="#EAB308"/><path d="M35 68Q50 78 65 68" stroke="#D97706" stroke-width="4" fill="none"/></svg>`,
+            origin: "Tender beef braised in dark unrefined panela cane sugar, allspice, and Worcestershire sauce, accompanied by coconut rice.",
+            whereToEat: "La Cocina de Socorro or Candé."
+          }
+        ],
+        ergTips: [
+          { title: "🌺 Support Palenqueras with Dignity", text: "When taking photos with fruit vendors in vibrant dress, purchase their fresh tropical fruits or sweets to support their families." },
+          { title: "🎶 The Resilience of Champeta", text: "Champeta is an urban Afro-diasporic cultural movement fusing soukous and Caribbean bass." }
+        ]
+      },
+
+      atacama: {
+        badge: "🇨🇱 Chile • Deep Space Altiplano",
+        region: "South America",
+        title: "Atacama Desert",
+        subtitle: "The world’s clearest stargazing, salt lagoons, and thermal geysers",
+        costs: {
+          flightUS: 680, flightSA: 390, flightCA: 620,
+          hotelNight: "$90 - $160", foodDay: "$35 - $60",
+          tours: "$320 (Astro Stargazing + Tatio Geysers + Moon Valley)",
+          totalUS: 1790, totalSA: 1500, totalCA: 1730,
+          currencyTip: "Chilean Pesos (CLP) are required for entrance to indigenous-managed reserves."
+        },
+        trail: [
+          { day: "Day 1 • Valley of the Moon at Dusk", icon: "🏜️", desc: "Hike along wind-sculpted salt caves as the sun paints the Licancabur volcano in shades of lilac and copper." },
+          { day: "Day 2 • Buoyancy in Laguna Céjar", icon: "🏊", desc: "Natural floating experience in hypersaline turquoise lagoons surrounded by white mineral crusts." },
+          { day: "Day 3 • Geysers del Tatio at Sunrise", icon: "🌋", desc: "Dawn expedition at 4,300m to witness thermal steam columns rising into sub-zero desert air." },
+          { day: "Day 4 • Archaeoastronomy with Elders", icon: "✨", desc: "Stargazing session combining high-powered optical telescopes with Licanantay lore of the Milky Way." }
+        ],
+        foods: [
+          {
+            name: "Pastel de Choclo with Desert Herbs",
+            svg: `<svg viewBox="0 0 100 100" class="w-16 h-16"><rect width="100" height="100" rx="20" fill="#FEF3C7"/><path d="M20 70L28 40H72L80 70H20Z" fill="#B45309"/><ellipse cx="50" cy="40" rx="26" ry="10" fill="#F59E0B"/><circle cx="45" cy="38" r="3" fill="#78350F"/><circle cx="55" cy="42" r="2.5" fill="#78350F"/><path d="M48 28L52 35" stroke="#15803D" stroke-width="2.5"/></svg>`,
+            origin: "Clay-pot sweet corn pie baked over seasoned braised beef, chicken, hard-boiled eggs, and black olives, perfumed with native rica-rica.",
+            whereToEat: "Restaurante Adobe on Calle Caracoles."
+          },
+          {
+            name: "Rica-Rica & Chañar Gelato",
+            svg: `<svg viewBox="0 0 100 100" class="w-16 h-16"><rect width="100" height="100" rx="20" fill="#F0FDF4"/><path d="M35 75L50 90L65 75Z" fill="#D97706"/><circle cx="50" cy="55" r="18" fill="#86EFAC"/><circle cx="45" cy="45" r="14" fill="#BBF7D0"/><circle cx="58" cy="50" r="12" fill="#4ADE80"/><path d="M50 35L52 42" stroke="#166534" stroke-width="2"/></svg>`,
+            origin: "Artisanal desert gelato flavored with wild mint-sage herbs and chañar tree fruit syrup resembling smoky caramel.",
+            whereToEat: "Heladería Babalu in San Pedro de Atacama."
+          }
+        ],
+        ergTips: [
+          { title: "🌌 Dark Sky Preservation", text: "Use only red light flashlights during stargazing tours to safeguard natural night vision and protect nocturnal wildlife." },
+          { title: "💧 Extreme Water Conservation", text: "Water is sacred and scarce in the desert. Keep showers short and avoid single-use plastics." }
+        ]
+      },
+
+      uyuni: {
+        badge: "🇧🇴 Bolivia • The White Horizon",
+        region: "South America",
+        title: "Salar de Uyuni & Potosí",
+        subtitle: "The infinite mirror, colonial mints, and Aymara heartland",
+        costs: {
+          flightUS: 650, flightSA: 460, flightCA: 590,
+          hotelNight: "$45 - $90", foodDay: "$15 - $30",
+          tours: "$240 (3-Day 4x4 Salar & Colored Lagoons Circuit)",
+          totalUS: 1290, totalSA: 1100, totalCA: 1230,
+          currencyTip: "Bolivianos (BOB) in cash are mandatory for national park entrance fees."
+        },
+        trail: [
+          { day: "Day 1 • The Sea of Salt & Island of Cacti", icon: "🌵", desc: "4x4 drive across brilliant white polygonal crusts to Incahuasi Island, hiking among colossal 10-meter cardón cacti." },
+          { day: "Day 2 • The Water Mirror Horizon", icon: "🪞", desc: "During rainy season (Jan–March), experience the surreal sensation of walking suspended amidst cloud reflections." },
+          { day: "Day 3 • Laguna Colorada & Flamingos", icon: "🦩", desc: "Travel to mineral lakes tinged deep red by micro-algae where thousands of James's flamingos nest." },
+          { day: "Day 4 • Potosí's Silver Mountain Mines", icon: "⛏️", desc: "Visit Casa de la Moneda and meet miner cooperatives to understand offerings for El Tío, lord of the underground." }
+        ],
+        foods: [
+          {
+            name: "Juicy Bolivian Salteña",
+            svg: `<svg viewBox="0 0 100 100" class="w-16 h-16"><rect width="100" height="100" rx="20" fill="#FFFBEB"/><ellipse cx="50" cy="55" rx="35" ry="20" fill="#D97706"/><path d="M15 55Q50 35 85 55" stroke="#92400E" stroke-width="4" fill="#B45309"/><path d="M20 53Q50 45 80 53" stroke="#FDE68A" stroke-width="2" stroke-dasharray="3 3"/></svg>`,
+            origin: "Braided pastry shell filled with piping-hot savory stew of meat, potatoes, peas, and aji pepper.",
+            whereToEat: "Morning salteñerías in Uyuni and Potosí."
+          },
+          {
+            name: "Royal Quinoa Altiplanic Soup",
+            svg: `<svg viewBox="0 0 100 100" class="w-16 h-16"><rect width="100" height="100" rx="20" fill="#F5F5F4"/><ellipse cx="50" cy="65" rx="36" ry="14" fill="#E7E5E4"/><ellipse cx="50" cy="52" rx="32" ry="12" fill="#78716C"/><path d="M20 52C20 70 35 82 50 82C65 82 80 70 80 52H20Z" fill="#A8A29E"/><circle cx="45" cy="52" r="2" fill="#FEF08A"/><circle cx="55" cy="50" r="2.5" fill="#FEF08A"/><circle cx="48" cy="55" r="2" fill="#FEF08A"/><path d="M42 42Q50 35 58 42" stroke="#16A34A" stroke-width="2.5" fill="none"/></svg>`,
+            origin: "Ancestral royal grain cultivated for millennia around the salt flats, simmered with native tubers and wild muña mint.",
+            whereToEat: "Community lodges along the high-altitude route."
+          }
+        ],
+        ergTips: [
+          { title: "🏔️ Warmth at 4,000m Elevation", text: "Temperatures plummet drastically once the sun sets over the salt flat. Pack thermal base layers." },
+          { title: "🤝 Respect Your Aymara Drivers", text: "Expedition drivers are master mechanics navigating unmarked tracks. Tips and friendly conversation are warmly appreciated." }
+        ]
+      },
+
+      mendoza: {
+        badge: "🇦🇷 Argentina • Andean Foothills",
+        region: "South America",
+        title: "Mendoza & The Andes",
+        subtitle: "Vineyards, high-mountain passes, and the ritual of the asado",
+        costs: {
+          flightUS: 620, flightSA: 320, flightCA: 580,
+          hotelNight: "$65 - $130", foodDay: "$25 - $45",
+          tours: "$210 (Valle de Uco Bodega Tastings + Thermal Springs)",
+          totalUS: 1410, totalSA: 1110, totalCA: 1370,
+          currencyTip: "In Argentina, international credit cards with the tourist rate offer great conversion value."
+        },
+        trail: [
+          { day: "Day 1 • Vineyard Cycling in Chacras de Coria", icon: "🚲", desc: "Rent a bicycle to pedal along tree-shaded lanes in Luján de Cuyo, visiting family bodegas and tasting Malbec." },
+          { day: "Day 2 • Modernist Architecture in Uco Valley", icon: "🍇", desc: "Tour striking wineries integrated into the Andean backdrop, paired with multi-course outdoor gastronomy lunches." },
+          { day: "Day 3 • High Mountain Pass & Mount Aconcagua", icon: "🏔️", desc: "Drive Route 7 past Puente del Inca up to the national park viewpoint of Aconcagua's 6,961m glaciated south wall." },
+          { day: "Day 4 • River Canyon Thermal Baths", icon: "♨️", desc: "Soak in stone pools built into the rocky cliffs of the Mendoza River canyon at Termas de Cacheuta." }
+        ],
+        foods: [
+          {
+            name: "Wood-Fired Asado Criollo",
+            svg: `<svg viewBox="0 0 100 100" class="w-16 h-16"><rect width="100" height="100" rx="20" fill="#FEF2F2"/><path d="M15 65H85" stroke="#44403C" stroke-width="4"/><path d="M25 50L75 50" stroke="#44403C" stroke-width="3"/><rect x="25" y="42" width="50" height="14" rx="4" fill="#991B1B"/><path d="M32 46H68" stroke="#F87171" stroke-width="2"/><circle cx="50" cy="49" r="3" fill="#15803D"/></svg>`,
+            origin: "Prime beef cuts grilled over open vine wood embers, dressed with fresh parsley, garlic, oregano, and olive oil chimichurri.",
+            whereToEat: "Francis Mallmann's 1884 or rustic vineyard bodegas."
+          },
+          {
+            name: "Clay Oven Mendocina Empanadas",
+            svg: `<svg viewBox="0 0 100 100" class="w-16 h-16"><rect width="100" height="100" rx="20" fill="#FFFBEB"/><ellipse cx="50" cy="52" rx="34" ry="18" fill="#F59E0B"/><path d="M18 52C25 38 75 38 82 52" stroke="#B45309" stroke-width="4" fill="#D97706"/><circle cx="35" cy="50" r="3" fill="#451A03"/></svg>`,
+            origin: "Hand-rolled pastry stuffed with knife-minced beef, sweet sautéed onions, hard-boiled eggs, and green olives.",
+            whereToEat: "Bodega La Azul or traditional neighborhood markets."
+          }
+        ],
+        ergTips: [
+          { title: "🌿 The Huarpe Irrigation Acequias", text: "Mendoza’s green groves exist because Huarpe water channels were preserved by later generations. Never dispose of litter into street canals." },
+          { title: "🍷 The Cultural Art of Sobremesa", text: "Enjoy lingering at the table in relaxed conversation long after food is finished—there is never a rush to request the check." }
+        ]
+      },
+
+      ouropreto: {
+        badge: "🇧🇷 Brazil • Baroque & Soul",
+        region: "South America",
+        title: "Ouro Preto & Tiradentes",
+        subtitle: "Soapstone carvings, gold mining history, and Minas woodstove warmth",
+        costs: {
+          flightUS: 750, flightSA: 180, flightCA: 690,
+          hotelNight: "$55 - $110", foodDay: "$20 - $35",
+          tours: "$120 (Mine Visits + Aleijadinho Museums + Tiradentes Train)",
+          totalUS: 1450, totalSA: 880, totalCA: 1390,
+          currencyTip: "Brazilian Reais (BRL) are used. Contactless cards and Pix mobile payments are accepted nearly everywhere."
+        },
+        trail: [
+          { day: "Day 1 • Aleijadinho's Sculptures in Ouro Preto", icon: "⛪", desc: "Ascend to the Church of Saint Francis of Assisi, marveling at soapstone reliefs and Mestre Ataíde's ceiling frescoes." },
+          { day: "Day 2 • Afro-Brazilian Legacy in Mina do Chico Rei", icon: "🔦", desc: "Descend into historic underground gold galleries to hear oral histories of enslaved miners who bought freedom." },
+          { day: "Day 3 • Historic Steam Train to Tiradentes", icon: "🚂", desc: "Ride the heritage locomotive skirting the São José mountain range to explore the cobblestone ateliers of Tiradentes." },
+          { day: "Day 4 • Raw Milk Cheese Farms & Cachaça Stills", icon: "🧀", desc: "Taste artisanal Queijo Minas cured on native wood shelves alongside freshly brewed drip coffee." }
+        ],
+        foods: [
+          {
+            name: "Feijão Tropeiro in Soapstone Pot",
+            svg: `<svg viewBox="0 0 100 100" class="w-16 h-16"><rect width="100" height="100" rx="20" fill="#FFFBEB"/><ellipse cx="50" cy="55" rx="34" ry="16" fill="#78716C"/><path d="M22 55C22 72 35 82 50 82C65 82 78 72 78 55H22Z" fill="#57534E"/><circle cx="42" cy="52" r="4" fill="#D97706"/><circle cx="58" cy="54" r="5" fill="#CA8A04"/><path d="M48 46L54 50" stroke="#16A34A" stroke-width="3"/></svg>`,
+            origin: "Hearty horseman's dish combining brown beans, toasted cassava flour, smoked sausage, crispy pork rinds, collard greens, and farm eggs.",
+            whereToEat: "Bené da Flauta or Casa do Ouvidor in Ouro Preto."
+          },
+          {
+            name: "Warm Pão de Queijo with Drip Coffee",
+            svg: `<svg viewBox="0 0 100 100" class="w-16 h-16"><rect width="100" height="100" rx="20" fill="#FEF3C7"/><circle cx="45" cy="52" r="18" fill="#FBBF24"/><circle cx="40" cy="48" r="3" fill="#D97706"/><circle cx="50" cy="54" r="2.5" fill="#D97706"/><path d="M68 45H78V62H68" stroke="#78350F" stroke-width="3" fill="none"/><rect x="62" y="42" width="16" height="24" rx="4" fill="#92400E"/></svg>`,
+            origin: "Chewy cheese bread baked with sweet and sour manioc starch and aged cured Minas cheese, served hot from the oven.",
+            whereToEat: "Colonial cafes in Tiradentes."
+          }
+        ],
+        ergTips: [
+          { title: "👞 Footwear for Historic Slopes", text: "Cobblestone streets are uneven and slippery when wet. Wear sturdy, rubber-soled walking shoes." },
+          { title: "☕ Minas Hospitality", text: "Accepting an offered cup of fresh coffee (cafezinho) and conversation is the heartfelt local way to seal a friendship." }
+        ]
+      },
+
+      galapagos: {
+        badge: "🇪🇨 Ecuador • Evolutionary Haven",
+        region: "South America",
+        title: "Galápagos & Historic Quito",
+        subtitle: "Giant tortoises, volcanic calderas, and equatorial heritage",
+        costs: {
+          flightUS: 750, flightSA: 720, flightCA: 640,
+          hotelNight: "$110 - $210", foodDay: "$35 - $60",
+          tours: "$420 (Galápagos National Park Entry + Snorkel + Inter-island Ferry)",
+          totalUS: 2250, totalSA: 2220, totalCA: 2140,
+          currencyTip: "Ecuador operates on the US Dollar (USD). Ensure bills are crisp and free of tears."
+        },
+        trail: [
+          { day: "Day 1 • Historic Quito & The Equator Line", icon: "🧭", desc: "Stand with a foot in both hemispheres at Mitad del Mundo and marvel at the gold-leaf interior of La Compañía de Jesús in Quito." },
+          { day: "Day 2 • Santa Cruz Highlands & Free Tortoises", icon: "🐢", desc: "Fly to Galápagos to walk through lush ranchlands where 250kg giant tortoises graze peacefully in the wild." },
+          { day: "Day 3 • Snorkeling Los Túneles in Isabela", icon: "🤿", desc: "Swim through submerged volcanic lava bridges alongside sea lions, sea horses, Galápagos penguins, and reef sharks." },
+          { day: "Day 4 • Marine Iguanas of Tortuga Bay", icon: "🦎", desc: "Hike through giant cactus forests to pristine white beaches where marine iguanas sunbathe on black basalt rocks." }
+        ],
+        foods: [
+          {
+            name: "Revitalizing Encebollado",
+            svg: `<svg viewBox="0 0 100 100" class="w-16 h-16"><rect width="100" height="100" rx="20" fill="#FEF2F2"/><ellipse cx="50" cy="55" rx="34" ry="16" fill="#DC2626"/><path d="M20 55C20 72 34 82 50 82C66 82 80 72 80 55H20Z" fill="#991B1B"/><circle cx="45" cy="50" r="4" fill="#FEF08A"/><path d="M35 48Q50 38 65 48" stroke="#831843" stroke-width="3" fill="none"/></svg>`,
+            origin: "Fresh tuna soup simmered with cassava, cumin, and red onions pickled with lime and cilantro, served with green plantain chifles.",
+            whereToEat: "Local picanterías in Puerto Ayora or Quito's Central Market."
+          },
+          {
+            name: "Locro de Papa with Fresh Cheese",
+            svg: `<svg viewBox="0 0 100 100" class="w-16 h-16"><rect width="100" height="100" rx="20" fill="#FFFBEB"/><ellipse cx="50" cy="55" rx="34" ry="16" fill="#FACC15"/><path d="M20 55C20 72 34 82 50 82C66 82 80 72 80 55H20Z" fill="#EAB308"/><rect x="42" y="48" width="8" height="8" fill="#FFFFFF" rx="1"/><rect x="52" y="52" width="7" height="7" fill="#FFFFFF" rx="1"/><path d="M36 50L40 56" stroke="#16A34A" stroke-width="2.5"/></svg>`,
+            origin: "Creamy traditional Andean potato chowder made with native tubers, queso fresco, and ripe avocado.",
+            whereToEat: "Historic bistros in San Marcos quarter, Quito."
+          }
+        ],
+        ergTips: [
+          { title: "🚯 Strict 2-Meter Wildlife Rule", text: "Galápagos animals have no natural fear of humans. Always maintain a minimum 2-meter distance." },
+          { title: "🧴 Reef-Safe Mineral Sunscreen", text: "Corals and marine iguanas are sensitive to synthetic chemicals. Use certified mineral reef-safe sunscreen." }
+        ]
+      },
+
+      lencois: {
+        badge: "🇧🇷 Brazil • Quartz Dunes & Lagoons",
+        region: "South America",
+        title: "Lençóis & São Luís",
+        subtitle: "Rolling white dunes, rainwater oases, and Afro-indigenous folklore",
+        costs: {
+          flightUS: 760, flightSA: 260, flightCA: 710,
+          hotelNight: "$60 - $120", foodDay: "$20 - $35",
+          tours: "$160 (Lagoa Bonita 4x4 Circuit + Rio Preguiças Boat)",
+          totalUS: 1490, totalSA: 990, totalCA: 1440,
+          currencyTip: "Carry cash in Reais for small boat transfers and remote beach food stalls in Atins."
+        },
+        trail: [
+          { day: "Day 1 • Tiled Colonial Mansions of São Luís", icon: "🏛️", desc: "Explore the UNESCO-listed city center adorned with Portuguese ceramic tiles and visit the vibrant Reggae Museum." },
+          { day: "Day 2 • Sunset at Lagoa Bonita", icon: "🌅", desc: "Ascend the steep entrance dune by rope to behold the surreal expanse of rolling white dunes and plunge into emerald rainwater lagoons." },
+          { day: "Day 3 • Downriver Along Rio Preguiças", icon: "🚤", desc: "Speedboat excursion along mangrove estuaries, climb the Mandacaru lighthouse for panoramic views, and arrive in rustic sandy Atins." },
+          { day: "Day 4 • An Evening of Tambor de Crioula", icon: "🪘", desc: "Join community gatherings around fire-tuned wood drums honoring Saint Benedict with rhythmic singing and circular dancing." }
+        ],
+        foods: [
+          {
+            name: "Arroz de Cuxá Maranhense",
+            svg: `<svg viewBox="0 0 100 100" class="w-16 h-16"><rect width="100" height="100" rx="20" fill="#F0FDF4"/><circle cx="50" cy="52" r="32" fill="#15803D"/><circle cx="48" cy="48" r="4" fill="#F97316"/><circle cx="56" cy="54" r="3.5" fill="#F97316"/><circle cx="42" cy="56" r="3" fill="#FDE68A"/><path d="M45 40L52 46" stroke="#FEF08A" stroke-width="2"/></svg>`,
+            origin: "Rice prepared with native sour vinagreira leaves (roselle), ground sesame seeds, dried shrimp, and hot peppers pounded in a wooden mortar.",
+            whereToEat: "Restaurante Senac or Cabana do Sol in São Luís."
+          },
+          {
+            name: "Charcoal Grilled Prawns in Atins",
+            svg: `<svg viewBox="0 0 100 100" class="w-16 h-16"><rect width="100" height="100" rx="20" fill="#FEF3C7"/><ellipse cx="50" cy="55" rx="32" ry="18" fill="#F59E0B"/><path d="M35 50C42 42 58 42 65 50" stroke="#DC2626" stroke-width="5" fill="none" stroke-linecap="round"/><circle cx="34" cy="50" r="3" fill="#7F1D1D"/><path d="M64 48L72 44" stroke="#DC2626" stroke-width="2.5"/></svg>`,
+            origin: "Freshly caught coastal prawns grilled over charcoal with garlic butter, served right on the beach.",
+            whereToEat: "Restaurante da Luzia or Sr. Antônio in Canto do Atins."
+          }
+        ],
+        ergTips: [
+          { title: "📅 Ideal Seasonal Travel Window", text: "Rainwater lagoons reach their fullest splendor between June and September. By October, many begin evaporating." },
+          { title: "🥁 Respecting Folk Traditions", text: "Bumba Meu Boi is a sacred living ritual. Applaud the singers and treat embroidered costumes with deep care." }
+        ]
+      },
+
+      antigua: {
+        badge: "🇬🇹 Guatemala • Maya Soul",
+        region: "Central America",
+        title: "Antigua & Lake Atitlán",
+        subtitle: "Volcanic horizons, living Maya languages, and backstrap textiles",
+        costs: {
+          flightUS: 380, flightSA: 560, flightCA: 190,
+          hotelNight: "$55 - $100", foodDay: "$20 - $35",
+          tours: "$170 (Lake Boat Hop + Pacaya Volcano Hike)",
+          totalUS: 1260, totalSA: 1440, totalCA: 1070,
+          currencyTip: "The Guatemalan Quetzal (GTQ) is named after the sacred Maya bird. Cash is indispensable in village craft markets."
+        },
+        trail: [
+          { day: "Day 1 • Santa Catalina Arch in Antigua", icon: "🏛️", desc: "Stroll along cobblestone streets framing the Volcán de Agua through the yellow archway, visiting ruined monastic courtyards." },
+          { day: "Day 2 • Boat Crossing Across Lake Atitlán", icon: "⛵", desc: "Cruise past crater volcanoes to San Juan La Laguna to visit women's botanical dye workshops and shade-grown coffee co-ops." },
+          { day: "Day 3 • The Syncretic Altar of Maximón", icon: "🕯️", desc: "Visit the community house in Santiago Atitlán sheltering Maximón to witness prayer rituals conducted in Tz'utujil with copal incense." },
+          { day: "Day 4 • Pacaya Volcano Lava Fields", icon: "🌋", desc: "Hike across black basaltic cinder slopes to roast marshmallows over active geothermal vents." }
+        ],
+        foods: [
+          {
+            name: "Pepián de Pollo Maya",
+            svg: `<svg viewBox="0 0 100 100" class="w-16 h-16"><rect width="100" height="100" rx="20" fill="#FEF3C7"/><ellipse cx="50" cy="55" rx="34" ry="16" fill="#78350F"/><path d="M22 55C22 72 35 82 50 82C65 82 78 72 78 55H22Z" fill="#57534E"/><circle cx="45" cy="50" r="5" fill="#DC2626"/><circle cx="56" cy="52" r="4" fill="#F59E0B"/><circle cx="48" cy="58" r="3" fill="#D97706"/></svg>`,
+            origin: "Guatemala’s national dish: tender chicken slow-cooked in a complex sauce of roasted squash seeds (pepitoria), sesame, and gentle chilies.",
+            whereToEat: "La Cuevita de Los Urquizú in Antigua."
+          },
+          {
+            name: "Rellenitos de Plátano",
+            svg: `<svg viewBox="0 0 100 100" class="w-16 h-16"><rect width="100" height="100" rx="20" fill="#FFFBEB"/><ellipse cx="50" cy="52" rx="30" ry="16" fill="#EAB308"/><ellipse cx="50" cy="52" rx="16" ry="8" fill="#451A03"/><path d="M30 45Q50 55 70 45" stroke="#FDE68A" stroke-width="2" fill="none"/></svg>`,
+            origin: "Mashed boiled plantain croquettes stuffed with chocolate-sweetened black bean paste, fried until caramelized and dusted in sugar.",
+            whereToEat: "Vendors at Antigua Central Market."
+          }
+        ],
+        ergTips: [
+          { title: "🧶 The Secret Language of Huipiles", text: "Embroidered Maya blouses are personal works of art: motifs communicate the wearer's home village, lineage, and clan." },
+          { title: "☕ Direct Coffee Purchasing", text: "Buy coffee directly from local indigenous grower cooperatives where revenues directly fund highland village schooling." }
+        ]
+      },
+
+      monteverde: {
+        badge: "🇨🇷 Costa Rica • Pura Vida",
+        region: "Central America",
+        title: "Monteverde & Nicoya",
+        subtitle: "Hanging cloud bridges, biodiversity reserves, and longevity secrets",
+        costs: {
+          flightUS: 420, flightSA: 580, flightCA: 220,
+          hotelNight: "$80 - $140", foodDay: "$30 - $50",
+          tours: "$230 (Hanging Canopy Bridges + Quetzal Guide + Arenal Springs)",
+          totalUS: 1490, totalSA: 1650, totalCA: 1290,
+          currencyTip: "Costa Rican Colones (CRC) are used, though US Dollars are widely accepted for tours and eco-lodges."
+        },
+        trail: [
+          { day: "Day 1 • Canopy Bridges in the Cloud Forest", icon: "🌉", desc: "Morning trek across suspension bridges 60 meters above the forest floor, surrounded by mosses and blooming orchids." },
+          { day: "Day 2 • Searching for the Resplendent Quetzal", icon: "🦜", desc: "Guided birding walk through Santa Elena Biological Reserve to spot quetzals feeding on wild laurel fruits." },
+          { day: "Day 3 • Longevity Wisdom in Nicoya", icon: "🌿", desc: "Visit community farms in the Blue Zone to learn how mineral water, fresh diet, and deep purpose sustain active centenarians." },
+          { day: "Day 4 • Volcanic Hot Springs in Arenal", icon: "♨️", desc: "Soak in magma-heated thermal rivers winding through tropical gardens at the foot of Arenal Volcano." }
+        ],
+        foods: [
+          {
+            name: "Traditional Gallo Pinto",
+            svg: `<svg viewBox="0 0 100 100" class="w-16 h-16"><rect width="100" height="100" rx="20" fill="#FEF3C7"/><circle cx="50" cy="52" r="30" fill="#FFFFFF"/><circle cx="42" cy="48" r="4" fill="#3B2F2F"/><circle cx="56" cy="54" r="4" fill="#3B2F2F"/><circle cx="48" cy="58" r="4" fill="#3B2F2F"/><path d="M40 40Q50 35 60 40" stroke="#EA580C" stroke-width="2.5" fill="none"/></svg>`,
+            origin: "Rice and black beans sautéed with onions, peppers, and savory Salsa Lizano, served for breakfast with farm eggs, fried cheese, and plantains.",
+            whereToEat: "Local sodas (family diners) in Santa Elena."
+          },
+          {
+            name: "Classic Casado Lunch",
+            svg: `<svg viewBox="0 0 100 100" class="w-16 h-16"><rect width="100" height="100" rx="20" fill="#F0FDF4"/><circle cx="50" cy="52" r="34" fill="#E2E8F0"/><rect x="35" y="44" width="30" height="12" rx="3" fill="#D97706"/><circle cx="34" cy="40" r="5" fill="#FFFFFF"/><circle cx="65" cy="42" r="4" fill="#15803D"/><path d="M40 64H60" stroke="#EA580C" stroke-width="4" stroke-linecap="round"/></svg>`,
+            origin: "The balanced daily staple: portions of rice, beans, fresh salad, sweet fried plantains, and grilled fish.",
+            whereToEat: "Soda La Amistad or Soda Sabor Tico."
+          }
+        ],
+        ergTips: [
+          { title: "🍃 The Philosophy of Pura Vida", text: "'Pura Vida' is more than a greeting; it represents gratitude, peaceful coexistence, and an unhurried perspective." },
+          { title: "🐒 Never Feed Wildlife", text: "Feeding coatis or monkeys damages their natural foraging behavior and harms animal wellness." }
+        ]
+      },
+
+      panama: {
+        badge: "🇵🇦 Panama • Two Oceans",
+        region: "Central America",
+        title: "Casco Antiguo & Guna Yala",
+        subtitle: "Global maritime crossroads and indigenous island autonomy",
+        costs: {
+          flightUS: 430, flightSA: 490, flightCA: 240,
+          hotelNight: "$75 - $130", foodDay: "$25 - $45",
+          tours: "$210 (Guna Yala San Blas Day Tour + Miraflores Locks)",
+          totalUS: 1420, totalSA: 1480, totalCA: 1230,
+          currencyTip: "The Panamanian Balboa (PAB) is pegged 1:1 with the US Dollar (USD), which is the circulating currency."
+        },
+        trail: [
+          { day: "Day 1 • Plaza de Francia & Colonial Rooftops", icon: "🌆", desc: "Explore Casco Viejo's brick plazas and golden altars, ending the evening on an outdoor terrace looking across the skyline." },
+          { day: "Day 2 • Engineering at Miraflores Locks", icon: "🚢", desc: "Watch massive container vessels transit through the Panama Canal locks as water levels shift between oceans." },
+          { day: "Day 3 • Journey to Autonomous Guna Yala", icon: "🏝️", desc: "4x4 journey through the jungle divide followed by boat navigation to pristine coral cays governed autonomously by the Guna." },
+          { day: "Day 4 • Textile Workshop with Guna Artisans", icon: "🎨", desc: "Learn the reverse appliqué needlework technique of Molas, understanding the spiritual symbolism woven into each cotton layer." }
+        ],
+        foods: [
+          {
+            name: "Sancocho de Gallina Panameño",
+            svg: `<svg viewBox="0 0 100 100" class="w-16 h-16"><rect width="100" height="100" rx="20" fill="#FEF2F2"/><ellipse cx="50" cy="55" rx="34" ry="16" fill="#F59E0B"/><path d="M22 55C22 72 35 82 50 82C65 82 78 72 78 55H22Z" fill="#D97706"/><circle cx="44" cy="50" r="5" fill="#FEF08A"/><circle cx="56" cy="52" r="4" fill="#FFFFFF"/><path d="M46 42L52 48" stroke="#15803D" stroke-width="3"/></svg>`,
+            origin: "Heartwarming chicken soup simmered with native ñame yams and seasoned purely with culantro leaves, served with white rice.",
+            whereToEat: "El Trapiche on Via Argentina or Casco Viejo."
+          },
+          {
+            name: "Crispy Yucca Carimañolas",
+            svg: `<svg viewBox="0 0 100 100" class="w-16 h-16"><rect width="100" height="100" rx="20" fill="#FFFBEB"/><ellipse cx="50" cy="52" rx="32" ry="14" fill="#D97706"/><ellipse cx="50" cy="52" rx="16" ry="6" fill="#78350F"/><path d="M25 50Q50 42 75 50" stroke="#FDE68A" stroke-width="2" fill="none"/></svg>`,
+            origin: "Mashed cassava torpedoes stuffed with spiced ground meat and fried until shatteringly crisp outside and fluffy within.",
+            whereToEat: "Traditional breakfast bakeries in Panama City."
+          }
+        ],
+        ergTips: [
+          { title: "🏝️ Community Governance in Guna Yala", text: "San Blas is sovereign indigenous territory. Always ask before photographing residents and honor local community entry rules." },
+          { title: "🚕 Efficient Urban Transit", text: "Panama City's metro is clean, air-conditioned, and quick for traversing key central districts." }
+        ]
+      },
+
+      ometepe: {
+        badge: "🇳🇮 Nicaragua • Volcanic Lakes",
+        region: "Central America",
+        title: "Granada & Ometepe Island",
+        subtitle: "Twin volcanic peaks in freshwater seas and pre-Columbian stone art",
+        costs: {
+          flightUS: 450, flightSA: 620, flightCA: 210,
+          hotelNight: "$40 - $80", foodDay: "$15 - $30",
+          tours: "$140 (Ometepe Ferry + Istián Kayak + Isletas Boat)",
+          totalUS: 1190, totalSA: 1360, totalCA: 950,
+          currencyTip: "The Nicaraguan Córdoba (NIO) is the local currency. US dollars are accepted, with change returned in córdobas."
+        },
+        trail: [
+          { day: "Day 1 • Colonial Granada & Lake Isletas", icon: "⛵", desc: "Climb the tower of La Merced church for vistas of Mombacho Volcano before boating through the volcanic islets." },
+          { day: "Day 2 • Ferry Crossing to Ometepe", icon: "🌋", desc: "Cross the freshwater sea as the dual silhouettes of Concepción and Maderas volcanoes grow larger on the horizon." },
+          { day: "Day 3 • Kayaking the Rio Istián Wetlands", icon: "🛶", desc: "Paddle silently between flooded trees in the isthmus separating the volcanoes, spotting herons, turtles, and monkeys." },
+          { day: "Day 4 • Petroglyphs & Ojo de Agua Spring", icon: "💧", desc: "Examine ancient spiral petroglyphs followed by a swim in crystalline subterranean spring waters." }
+        ],
+        foods: [
+          {
+            name: "Classic Vigorón on Banana Leaf",
+            svg: `<svg viewBox="0 0 100 100" class="w-16 h-16"><rect width="100" height="100" rx="20" fill="#F0FDF4"/><polygon points="20,70 80,70 70,40 30,40" fill="#15803D"/><circle cx="45" cy="50" r="8" fill="#FEF08A"/><ellipse cx="58" cy="48" rx="8" ry="5" fill="#D97706"/><circle cx="50" cy="42" r="3" fill="#DC2626"/></svg>`,
+            origin: "Steamed tender cassava roots topped with crispy pork chicharrón and tart pickled cabbage salad with mimbro peppers.",
+            whereToEat: "Granada Central Park food kiosks."
+          },
+          {
+            name: "Festive Sunday Nacatamal",
+            svg: `<svg viewBox="0 0 100 100" class="w-16 h-16"><rect width="100" height="100" rx="20" fill="#FEF3C7"/><rect x="25" y="42" width="50" height="24" rx="4" fill="#166534"/><path d="M25 54H75" stroke="#FDE68A" stroke-width="3"/><path d="M42 42V66" stroke="#FDE68A" stroke-width="3"/><circle cx="50" cy="54" r="5" fill="#CA8A04"/></svg>`,
+            origin: "Corn dough seasoned with lard and achiote, wrapped in plantain leaves with marinated pork, rice, potatoes, and mint.",
+            whereToEat: "Family homes and markets on Sunday mornings."
+          }
+        ],
+        ergTips: [
+          { title: "🌋 Sacred Volcanic Spirit", text: "In Nahuatl cosmology, Ometepe’s volcanoes were sacred dwellings of deities. Stay on marked trails." },
+          { title: "🍫 Heritage Cacao Culture", text: "Nicaragua produces fine organic cacao. Visit cooperative artisan chocolate ateliers in Granada." }
+        ]
+      }
+    };
+
+    function filterByRegion(region) {
+      currentRegion = region;
+      const tabs = ['all', 'south', 'central'];
+      tabs.forEach(t => {
+        const btn = document.getElementById(`filter-btn-${t}`);
+        if (t === region) {
+          btn.className = "filter-tab px-3.5 py-1.5 text-xs font-bold rounded-xl bg-mongo-forest text-white transition-all shadow-xs";
+        } else {
+          btn.className = "filter-tab px-3.5 py-1.5 text-xs font-bold rounded-xl bg-stone-100 text-stone-700 hover:bg-stone-200 transition-all";
+        }
+      });
+      handleFilterChange();
+    }
+
+    function handleFilterChange() {
+      const countryVal = document.getElementById('countrySelect').value;
+      const searchVal = document.getElementById('searchInput').value.toLowerCase().trim();
+      currentCountry = countryVal;
+
+      const cards = document.querySelectorAll('.destination-card');
+      let visibleCount = 0;
+
+      cards.forEach(card => {
+        const cardRegion = card.getAttribute('data-region');
+        const cardCountry = card.getAttribute('data-country');
+        const cardSearch = card.getAttribute('data-search').toLowerCase();
+
+        const matchesRegion = currentRegion === 'all' || cardRegion === currentRegion;
+        const matchesCountry = currentCountry === 'all' || cardCountry === currentCountry;
+        const matchesSearch = !searchVal || cardSearch.includes(searchVal);
+
+        if (matchesRegion && matchesCountry && matchesSearch) {
+          card.classList.remove('hidden');
+          visibleCount++;
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+
+      const noResults = document.getElementById('noResultsMsg');
+      if (visibleCount === 0) {
+        noResults.classList.remove('hidden');
+      } else {
+        noResults.classList.add('hidden');
+      }
+    }
+
+    function setFlightOrigin(origin) {
+      currentOrigin = origin;
+      const origins = ['US', 'SA', 'CA'];
+      
+      origins.forEach(orig => {
+        const btn = document.getElementById(`btnOrigin${orig}`);
+        if (orig === origin) {
+          btn.className = "px-3 py-1.5 text-xs font-semibold rounded-lg bg-mongo-forest text-white transition-all shadow-sm";
+        } else {
+          btn.className = "px-3 py-1.5 text-xs font-semibold rounded-lg text-stone-600 hover:text-stone-900 transition-all";
+        }
+      });
+
+      document.querySelectorAll('.total-cost').forEach(el => {
+        let attr = 'data-us';
+        if (origin === 'SA') attr = 'data-sa';
+        if (origin === 'CA') attr = 'data-ca';
+        const val = el.getAttribute(attr);
+        el.textContent = `$${Number(val).toLocaleString('en-US')} USD`;
+      });
+
+      document.querySelectorAll('.flight-cost').forEach(el => {
+        let attr = 'data-us';
+        if (origin === 'SA') attr = 'data-sa';
+        if (origin === 'CA') attr = 'data-ca';
+        const val = el.getAttribute(attr);
+        el.textContent = `$${Number(val).toLocaleString('en-US')} USD`;
+      });
+
+      updateModalBudgetContent();
+    }
+
+    function openDestinationModal(destId) {
+      const data = destinationDetailsData[destId];
+      if (!data) return;
+
+      currentModalDestId = destId;
+
+      document.getElementById('modalBadge').textContent = data.badge;
+      document.getElementById('modalRegion').textContent = data.region;
+      document.getElementById('modalTitle').textContent = data.title;
+      document.getElementById('modalSubtitle').textContent = data.subtitle;
+
+      const trailContainer = document.getElementById('trailStepsContainer');
+      trailContainer.innerHTML = '';
+      data.trail.forEach((step, idx) => {
+        const stepEl = document.createElement('div');
+        stepEl.className = "p-4 rounded-2xl bg-white border border-[#E9DFCE] hover:border-terracotta-500 transition-all shadow-xs flex items-start gap-3.5";
+        stepEl.innerHTML = `
+          <div class="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center text-xl shrink-0 border border-amber-200 shadow-xs">
+            ${step.icon}
+          </div>
+          <div class="space-y-1 flex-1">
+            <div class="flex items-center justify-between">
+              <h6 class="text-xs font-bold text-stone-900">${step.day}</h6>
+              <span class="text-[10px] font-semibold text-terracotta-600 uppercase tracking-wider">Step 0${idx + 1}</span>
+            </div>
+            <p class="text-xs text-stone-600 leading-relaxed">${step.desc}</p>
+          </div>
+        `;
+        trailContainer.appendChild(stepEl);
+      });
+
+      const foodContainer = document.getElementById('foodDishesContainer');
+      foodContainer.innerHTML = '';
+      data.foods.forEach(food => {
+        const foodEl = document.createElement('div');
+        foodEl.className = "p-4 rounded-2xl bg-white border border-[#E9DFCE] hover:shadow-sm transition-all flex flex-col justify-between";
+        foodEl.innerHTML = `
+          <div class="flex items-start gap-3 mb-3">
+            <div class="w-16 h-16 shrink-0 bg-stone-50 rounded-2xl border border-stone-200 flex items-center justify-center p-1">
+              ${food.svg}
+            </div>
+            <div>
+              <h6 class="text-xs font-bold text-stone-950">${food.name}</h6>
+              <p class="text-[11px] text-stone-600 mt-1 leading-relaxed">${food.origin}</p>
+            </div>
+          </div>
+          <div class="pt-2.5 border-t border-dashed border-stone-200 text-[10px] text-stone-500 flex items-center gap-1.5">
+            <span class="text-xs">📍</span>
+            <span><strong>Where to savor:</strong> ${food.whereToEat}</span>
+          </div>
+        `;
+        foodContainer.appendChild(foodEl);
+      });
+
+      const ergContainer = document.getElementById('ergTipsContainer');
+      ergContainer.innerHTML = '';
+      data.ergTips.forEach(tip => {
+        const tipEl = document.createElement('div');
+        tipEl.className = "p-5 rounded-2xl bg-white border border-[#E9DFCE] space-y-2";
+        tipEl.innerHTML = `
+          <h6 class="text-xs font-bold text-stone-900 flex items-center gap-1.5">${tip.title}</h6>
+          <p class="text-xs text-stone-600 leading-relaxed">${tip.text}</p>
+        `;
+        ergContainer.appendChild(tipEl);
+      });
+
+      updateModalBudgetContent();
+      switchModalTab('trail');
+
+      const modal = document.getElementById('destinationModal');
+      modal.classList.remove('hidden');
+      document.body.classList.add('overflow-hidden');
+    }
+
+    function switchModalTab(tabKey) {
+      const tabs = ['trail', 'food', 'erg', 'budget'];
+      tabs.forEach(t => {
+        const btn = document.getElementById(`tab-btn-${t}`);
+        const content = document.getElementById(`tab-content-${t}`);
+        if (t === tabKey) {
+          btn.className = "py-3 px-3 text-xs font-bold border-b-2 border-mongo-forest text-mongo-forest flex items-center gap-1.5 transition-all whitespace-nowrap";
+          content.classList.remove('hidden');
+        } else {
+          btn.className = "py-3 px-3 text-xs font-bold border-b-2 border-transparent text-stone-500 hover:text-stone-900 flex items-center gap-1.5 transition-all whitespace-nowrap";
+          content.classList.add('hidden');
+        }
+      });
+    }
+
+    function updateModalBudgetContent() {
+      if (!currentModalDestId) return;
+      const data = destinationDetailsData[currentModalDestId];
+      if (!data) return;
+
+      let originTitle = 'US Departure Estimate (USD)';
+      let grandTotal = data.costs.totalUS;
+      let flightCost = data.costs.flightUS;
+
+      if (currentOrigin === 'SA') {
+        originTitle = 'South America Departure Estimate (USD)';
+        grandTotal = data.costs.totalSA;
+        flightCost = data.costs.flightSA;
+      } else if (currentOrigin === 'CA') {
+        originTitle = 'Central America Departure Estimate (USD)';
+        grandTotal = data.costs.totalCA;
+        flightCost = data.costs.flightCA;
+      }
+
+      document.getElementById('modalBudgetCurrentOrigin').textContent = originTitle;
+      document.getElementById('modalBudgetGrandTotal').textContent = `$${Number(grandTotal).toLocaleString('en-US')} USD`;
+      document.getElementById('modalCurrencyTip').textContent = data.costs.currencyTip;
+
+      const metricsContainer = document.getElementById('budgetMetricsGrid');
+      metricsContainer.innerHTML = `
+        <div class="p-3.5 rounded-xl bg-stone-50 border border-stone-200">
+          <span class="text-[10px] uppercase font-bold text-stone-500 block">Roundtrip Flight (${originTitle.replace(' Estimate (USD)', '')})</span>
+          <strong class="text-sm font-bold text-mongo-dark">$${flightCost} USD</strong>
+        </div>
+        <div class="p-3.5 rounded-xl bg-stone-50 border border-stone-200">
+          <span class="text-[10px] uppercase font-bold text-stone-500 block">Avg Hotel / Night</span>
+          <strong class="text-sm font-bold text-mongo-dark">${data.costs.hotelNight}</strong>
+        </div>
+        <div class="p-3.5 rounded-xl bg-stone-50 border border-stone-200">
+          <span class="text-[10px] uppercase font-bold text-stone-500 block">Food & Dining / Day</span>
+          <strong class="text-sm font-bold text-mongo-dark">${data.costs.foodDay}</strong>
+        </div>
+        <div class="p-3.5 rounded-xl bg-stone-50 border border-stone-200">
+          <span class="text-[10px] uppercase font-bold text-stone-500 block">Cultural Tours & Entry Fees</span>
+          <strong class="text-xs font-bold text-mongo-dark">${data.costs.tours}</strong>
+        </div>
+      `;
+    }
+
+    function closeDestinationModal() {
+      const modal = document.getElementById('destinationModal');
+      modal.classList.add('hidden');
+      document.body.classList.remove('overflow-hidden');
+      currentModalDestId = null;
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeDestinationModal();
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const cards = document.querySelectorAll('.destination-card');
+      const destIds = [
+        'cusco', 'cartagena', 'atacama', 'uyuni', 
+        'mendoza', 'ouropreto', 'galapagos', 'lencois', 
+        'antigua', 'monteverde', 'panama', 'ometepe'
+      ];
+      cards.forEach((card, index) => {
+        if (destIds[index]) {
+          card.classList.add('interactive-card');
+          card.addEventListener('click', (e) => {
+            if (e.target.tagName.toLowerCase() === 'button' || e.target.closest('button')) {
+              return;
+            }
+            openDestinationModal(destIds[index]);
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
